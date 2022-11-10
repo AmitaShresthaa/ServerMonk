@@ -1,0 +1,3125 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyO+/JbKNNs1MA+iEz+cxNss",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/AmitaShresthaa/ServerMonk/blob/main/ObjectDetection\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "vmd9qmzWSTdk",
+        "outputId": "c41ca524-054d-4367-f62c-83fa47d702ee"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Mounted at /content/drive\n"
+          ]
+        }
+      ],
+      "source": [
+        "from google.colab import drive\n",
+        "drive.mount('/content/drive')"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%cd /content/drive/MyDrive/Github/"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "InGfUhcGSsgM",
+        "outputId": "60dcb82a-eeea-4ea3-90ef-24a558c25940"
+      },
+      "execution_count": 94,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/drive/MyDrive/Github\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%cd TensorFlow/"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "RwqhTxj0XY8B",
+        "outputId": "a8ba3069-bcd4-4f65-feba-238d1e50777a"
+      },
+      "execution_count": 15,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/drive/MyDrive/Github/TensorFlow\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%ls -a"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Y6nYjnL8YdNH",
+        "outputId": "458ab9b1-9eb1-4c0e-f739-c7a8ae55efee"
+      },
+      "execution_count": 16,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\u001b[0m\u001b[01;34m.git\u001b[0m/\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "username = 'AmitaShresthaa'\n",
+        "git_token = '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'\n",
+        "repository = 'TensorFlow'"
+      ],
+      "metadata": {
+        "id": "eS3B4qTjYmha"
+      },
+      "execution_count": 17,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!git clone https://github.com/tensorflow/models.git"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Uf6hMaF4YzCa",
+        "outputId": "4e5626c1-dc6d-4fe8-8ee9-3067aed3716e"
+      },
+      "execution_count": 24,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Cloning into 'models'...\n",
+            "remote: Enumerating objects: 78603, done.\u001b[K\n",
+            "remote: Counting objects: 100% (406/406), done.\u001b[K\n",
+            "remote: Compressing objects: 100% (220/220), done.\u001b[K\n",
+            "remote: Total 78603 (delta 216), reused 349 (delta 184), pack-reused 78197\u001b[K\n",
+            "Receiving objects: 100% (78603/78603), 593.74 MiB | 13.67 MiB/s, done.\n",
+            "Resolving deltas: 100% (55839/55839), done.\n",
+            "Checking out files: 100% (3203/3203), done.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%ls\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "NPq_qOHsaeCs",
+        "outputId": "d693c5e6-6c04-43ca-8ca1-e6628ccf5794"
+      },
+      "execution_count": 25,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\u001b[0m\u001b[01;34mmodels\u001b[0m/\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!git status\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "18IaDezIahbE",
+        "outputId": "6dac4145-e253-4683-d2bd-5f45f472ec36"
+      },
+      "execution_count": 26,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "On branch master\n",
+            "\n",
+            "No commits yet\n",
+            "\n",
+            "Untracked files:\n",
+            "  (use \"git add <file>...\" to include in what will be committed)\n",
+            "\n",
+            "\t\u001b[31mmodels/\u001b[m\n",
+            "\n",
+            "nothing added to commit but untracked files present (use \"git add\" to track)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!git add ."
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "sQQbHrPhakLa",
+        "outputId": "cbed1b91-727d-4e13-8c4c-b9507a637a6b"
+      },
+      "execution_count": 27,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "warning: adding embedded git repository: models\n",
+            "hint: You've added another git repository inside your current repository.\n",
+            "hint: Clones of the outer repository will not contain the contents of\n",
+            "hint: the embedded repository and will not know how to obtain it.\n",
+            "hint: If you meant to add a submodule, use:\n",
+            "hint: \n",
+            "hint: \tgit submodule add <url> models\n",
+            "hint: \n",
+            "hint: If you added this path by mistake, you can remove it from the\n",
+            "hint: index with:\n",
+            "hint: \n",
+            "hint: \tgit rm --cached models\n",
+            "hint: \n",
+            "hint: See \"git help submodule\" for more information.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!git push"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "kdFLR1bEaw6l",
+        "outputId": "eef87902-5be1-4eb3-de4e-8ac2e3484d06"
+      },
+      "execution_count": 33,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "fatal: No configured push destination.\n",
+            "Either specify the URL from the command-line or configure a remote repository using\n",
+            "\n",
+            "    git remote add <name> <url>\n",
+            "\n",
+            "and then push using the remote name\n",
+            "\n",
+            "    git push <name>\n",
+            "\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!git config --global user.email \"amitastha0o7@gmail.com\"\n",
+        " \n",
+        "!git config --global user.name \"Amita\""
+      ],
+      "metadata": {
+        "id": "pkgKKAaUbzXD"
+      },
+      "execution_count": 32,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!git commit -m \"First commit\""
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "O1A2m4dtaoax",
+        "outputId": "8f09a9af-f4c3-41dd-ff21-9084124f5d2e"
+      },
+      "execution_count": 35,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[master (root-commit) 3c8de6b] First commit\n",
+            " 1 file changed, 1 insertion(+)\n",
+            " create mode 160000 models\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!git push "
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Qhf1DC62cASq",
+        "outputId": "c24b2962-8112-4c07-9b36-b95f660a9944"
+      },
+      "execution_count": 36,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "fatal: No configured push destination.\n",
+            "Either specify the URL from the command-line or configure a remote repository using\n",
+            "\n",
+            "    git remote add <name> <url>\n",
+            "\n",
+            "and then push using the remote name\n",
+            "\n",
+            "    git push <name>\n",
+            "\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!git status"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "lyVBOSYZbSkm",
+        "outputId": "d1609382-2da8-4265-b7e6-bf25e301573c"
+      },
+      "execution_count": 38,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "On branch master\n",
+            "Changes not staged for commit:\n",
+            "  (use \"git add <file>...\" to update what will be committed)\n",
+            "  (use \"git checkout -- <file>...\" to discard changes in working directory)\n",
+            "  (commit or discard the untracked or modified content in submodules)\n",
+            "\n",
+            "\t\u001b[31mmodified:   models\u001b[m (modified content)\n",
+            "\n",
+            "no changes added to commit (use \"git add\" and/or \"git commit -a\")\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!git commit -a"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "LqdadZAWcnAy",
+        "outputId": "2457b22f-5580-417a-e778-3d9656aef269"
+      },
+      "execution_count": 39,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "On branch master\n",
+            "Changes not staged for commit:\n",
+            "\t\u001b[31mmodified:   models\u001b[m (modified content)\n",
+            "\n",
+            "no changes added to commit\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%cd .."
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Ut7Zxg-Hhsgd",
+        "outputId": "2324f362-ffa3-4f4d-dcff-c59924726c82"
+      },
+      "execution_count": 60,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/drive/MyDrive/Github/TensorFlow/models/research\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "ls"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "qu5X2QNKjF80",
+        "outputId": "7ca9dd08-1580-46e1-9844-84981a6e8819"
+      },
+      "execution_count": 95,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\u001b[0m\u001b[01;34mTensorFlow\u001b[0m/\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%cd object_detection/builders"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "DlbcbSs4jQFE",
+        "outputId": "4efeab4a-6d35-46c2-88c5-c233fb5062d5"
+      },
+      "execution_count": 65,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/drive/MyDrive/Github/TensorFlow/models/research/object_detection/builders\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "ls"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "hj_OuN36hcpZ",
+        "outputId": "81941ca5-c3c5-4d24-e2d2-4fa45bea9ac2"
+      },
+      "execution_count": 105,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\u001b[0m\u001b[01;34manchor_generators\u001b[0m/                       \u001b[01;34minference\u001b[0m/\n",
+            "\u001b[01;34mbox_coders\u001b[0m/                              __init__.py\n",
+            "\u001b[01;34mbuilders\u001b[0m/                                inputs.py\n",
+            "\u001b[01;34mcolab_tutorials\u001b[0m/                         inputs_test.py\n",
+            "\u001b[01;34mconfigs\u001b[0m/                                 \u001b[01;34mlegacy\u001b[0m/\n",
+            "CONTRIBUTING.md                          \u001b[01;34mmatchers\u001b[0m/\n",
+            "\u001b[01;34mcore\u001b[0m/                                    \u001b[01;34mmeta_architectures\u001b[0m/\n",
+            "\u001b[01;34mdata\u001b[0m/                                    \u001b[01;34mmetrics\u001b[0m/\n",
+            "\u001b[01;34mdata_decoders\u001b[0m/                           model_hparams.py\n",
+            "\u001b[01;34mdataset_tools\u001b[0m/                           model_lib.py\n",
+            "\u001b[01;34mdockerfiles\u001b[0m/                             model_lib_tf1_test.py\n",
+            "eval_util.py                             model_lib_tf2_test.py\n",
+            "eval_util_test.py                        model_lib_v2.py\n",
+            "exporter_lib_tf2_test.py                 model_main.py\n",
+            "exporter_lib_v2.py                       model_main_tf2.py\n",
+            "exporter_main_v2.py                      \u001b[01;34mmodels\u001b[0m/\n",
+            "exporter.py                              model_tpu_main.py\n",
+            "exporter_tf1_test.py                     \u001b[01;34mpackages\u001b[0m/\n",
+            "export_inference_graph.py                \u001b[01;34mpredictors\u001b[0m/\n",
+            "export_tflite_graph_lib_tf2.py           \u001b[01;34mprotos\u001b[0m/\n",
+            "export_tflite_graph_lib_tf2_test.py      README.md\n",
+            "export_tflite_graph_tf2.py               \u001b[01;34msamples\u001b[0m/\n",
+            "export_tflite_ssd_graph_lib.py           \u001b[01;34mtest_data\u001b[0m/\n",
+            "export_tflite_ssd_graph_lib_tf1_test.py  \u001b[01;34mtest_images\u001b[0m/\n",
+            "export_tflite_ssd_graph.py               \u001b[01;34mtpu_exporters\u001b[0m/\n",
+            "\u001b[01;34mg3doc\u001b[0m/                                   \u001b[01;34mutils\u001b[0m/\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%cd builders\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "olQ98Uezl5t6",
+        "outputId": "1f6a3bd6-2282-430c-e0ed-fa371d8f628c"
+      },
+      "execution_count": 108,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/drive/MyDrive/Github/TensorFlow/models/research/object_detection/builders\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "ls"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "D0IjroklnXns",
+        "outputId": "07ffae8f-1010-44d9-9a3c-7b47d8930d44"
+      },
+      "execution_count": 109,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "anchor_generator_builder.py\n",
+            "anchor_generator_builder_test.py\n",
+            "box_coder_builder.py\n",
+            "box_coder_builder_test.py\n",
+            "box_predictor_builder.py\n",
+            "box_predictor_builder_test.py\n",
+            "calibration_builder.py\n",
+            "calibration_builder_test.py\n",
+            "dataset_builder.py\n",
+            "dataset_builder_test.py\n",
+            "decoder_builder.py\n",
+            "decoder_builder_test.py\n",
+            "graph_rewriter_builder.py\n",
+            "graph_rewriter_builder_tf1_test.py\n",
+            "hyperparams_builder.py\n",
+            "hyperparams_builder_test.py\n",
+            "image_resizer_builder.py\n",
+            "image_resizer_builder_test.py\n",
+            "__init__.py\n",
+            "input_reader_builder.py\n",
+            "input_reader_builder_tf1_test.py\n",
+            "losses_builder.py\n",
+            "losses_builder_test.py\n",
+            "matcher_builder.py\n",
+            "matcher_builder_test.py\n",
+            "model_builder.py\n",
+            "model_builder_test.py\n",
+            "model_builder_tf1_test.py\n",
+            "model_builder_tf2_test.py\n",
+            "optimizer_builder.py\n",
+            "optimizer_builder_tf1_test.py\n",
+            "optimizer_builder_tf2_test.py\n",
+            "post_processing_builder.py\n",
+            "post_processing_builder_test.py\n",
+            "preprocessor_builder.py\n",
+            "preprocessor_builder_test.py\n",
+            "region_similarity_calculator_builder.py\n",
+            "region_similarity_calculator_builder_test.py\n",
+            "target_assigner_builder.py\n",
+            "target_assigner_builder_test.py\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%pip install pillow Cython lxml jupyter matplotlib"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "YmVBbBUPog3y",
+        "outputId": "d6077c1b-90b5-4647-c76e-99ec4ced7d95"
+      },
+      "execution_count": 122,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+            "Requirement already satisfied: pillow in /usr/local/lib/python3.7/dist-packages (7.1.2)\n",
+            "Requirement already satisfied: Cython in /usr/local/lib/python3.7/dist-packages (0.29.32)\n",
+            "Requirement already satisfied: lxml in /usr/local/lib/python3.7/dist-packages (4.9.1)\n",
+            "Collecting jupyter\n",
+            "  Downloading jupyter-1.0.0-py2.py3-none-any.whl (2.7 kB)\n",
+            "Requirement already satisfied: matplotlib in /usr/local/lib/python3.7/dist-packages (3.2.2)\n",
+            "Requirement already satisfied: jupyter-console in /usr/local/lib/python3.7/dist-packages (from jupyter) (6.1.0)\n",
+            "Collecting qtconsole\n",
+            "  Downloading qtconsole-5.4.0-py3-none-any.whl (121 kB)\n",
+            "\u001b[K     |████████████████████████████████| 121 kB 7.2 MB/s \n",
+            "\u001b[?25hRequirement already satisfied: ipywidgets in /usr/local/lib/python3.7/dist-packages (from jupyter) (7.7.1)\n",
+            "Requirement already satisfied: nbconvert in /usr/local/lib/python3.7/dist-packages (from jupyter) (5.6.1)\n",
+            "Requirement already satisfied: notebook in /usr/local/lib/python3.7/dist-packages (from jupyter) (5.7.16)\n",
+            "Requirement already satisfied: ipykernel in /usr/local/lib/python3.7/dist-packages (from jupyter) (5.3.4)\n",
+            "Requirement already satisfied: numpy>=1.11 in /usr/local/lib/python3.7/dist-packages (from matplotlib) (1.21.6)\n",
+            "Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python3.7/dist-packages (from matplotlib) (0.11.0)\n",
+            "Requirement already satisfied: python-dateutil>=2.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib) (2.8.2)\n",
+            "Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,>=2.0.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib) (3.0.9)\n",
+            "Requirement already satisfied: kiwisolver>=1.0.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib) (1.4.4)\n",
+            "Requirement already satisfied: typing-extensions in /usr/local/lib/python3.7/dist-packages (from kiwisolver>=1.0.1->matplotlib) (4.1.1)\n",
+            "Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.7/dist-packages (from python-dateutil>=2.1->matplotlib) (1.15.0)\n",
+            "Requirement already satisfied: tornado>=4.2 in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter) (6.0.4)\n",
+            "Requirement already satisfied: ipython>=5.0.0 in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter) (7.9.0)\n",
+            "Requirement already satisfied: traitlets>=4.1.0 in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter) (5.1.1)\n",
+            "Requirement already satisfied: jupyter-client in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter) (6.1.12)\n",
+            "Requirement already satisfied: decorator in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (4.4.2)\n",
+            "Collecting jedi>=0.10\n",
+            "  Downloading jedi-0.18.1-py2.py3-none-any.whl (1.6 MB)\n",
+            "\u001b[K     |████████████████████████████████| 1.6 MB 47.4 MB/s \n",
+            "\u001b[?25hRequirement already satisfied: setuptools>=18.5 in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (57.4.0)\n",
+            "Requirement already satisfied: backcall in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (0.2.0)\n",
+            "Requirement already satisfied: prompt-toolkit<2.1.0,>=2.0.0 in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (2.0.10)\n",
+            "Requirement already satisfied: pygments in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (2.6.1)\n",
+            "Requirement already satisfied: pickleshare in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (0.7.5)\n",
+            "Requirement already satisfied: pexpect in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (4.8.0)\n",
+            "Requirement already satisfied: parso<0.9.0,>=0.8.0 in /usr/local/lib/python3.7/dist-packages (from jedi>=0.10->ipython>=5.0.0->ipykernel->jupyter) (0.8.3)\n",
+            "Requirement already satisfied: wcwidth in /usr/local/lib/python3.7/dist-packages (from prompt-toolkit<2.1.0,>=2.0.0->ipython>=5.0.0->ipykernel->jupyter) (0.2.5)\n",
+            "Requirement already satisfied: ipython-genutils~=0.2.0 in /usr/local/lib/python3.7/dist-packages (from ipywidgets->jupyter) (0.2.0)\n",
+            "Requirement already satisfied: widgetsnbextension~=3.6.0 in /usr/local/lib/python3.7/dist-packages (from ipywidgets->jupyter) (3.6.1)\n",
+            "Requirement already satisfied: jupyterlab-widgets>=1.0.0 in /usr/local/lib/python3.7/dist-packages (from ipywidgets->jupyter) (3.0.3)\n",
+            "Requirement already satisfied: jupyter-core>=4.4.0 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (4.11.2)\n",
+            "Requirement already satisfied: Send2Trash in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (1.8.0)\n",
+            "Requirement already satisfied: prometheus-client in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (0.15.0)\n",
+            "Requirement already satisfied: jinja2<=3.0.0 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (2.11.3)\n",
+            "Requirement already satisfied: terminado>=0.8.1 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (0.13.3)\n",
+            "Requirement already satisfied: nbformat in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (5.7.0)\n",
+            "Requirement already satisfied: pyzmq>=17 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (23.2.1)\n",
+            "Requirement already satisfied: MarkupSafe>=0.23 in /usr/local/lib/python3.7/dist-packages (from jinja2<=3.0.0->notebook->jupyter) (2.0.1)\n",
+            "Requirement already satisfied: entrypoints>=0.2.2 in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (0.4)\n",
+            "Requirement already satisfied: mistune<2,>=0.8.1 in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (0.8.4)\n",
+            "Requirement already satisfied: bleach in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (5.0.1)\n",
+            "Requirement already satisfied: defusedxml in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (0.7.1)\n",
+            "Requirement already satisfied: pandocfilters>=1.4.1 in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (1.5.0)\n",
+            "Requirement already satisfied: testpath in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (0.6.0)\n",
+            "Requirement already satisfied: fastjsonschema in /usr/local/lib/python3.7/dist-packages (from nbformat->notebook->jupyter) (2.16.2)\n",
+            "Requirement already satisfied: jsonschema>=2.6 in /usr/local/lib/python3.7/dist-packages (from nbformat->notebook->jupyter) (4.3.3)\n",
+            "Requirement already satisfied: importlib-metadata>=3.6 in /usr/local/lib/python3.7/dist-packages (from nbformat->notebook->jupyter) (4.13.0)\n",
+            "Requirement already satisfied: zipp>=0.5 in /usr/local/lib/python3.7/dist-packages (from importlib-metadata>=3.6->nbformat->notebook->jupyter) (3.10.0)\n",
+            "Requirement already satisfied: importlib-resources>=1.4.0 in /usr/local/lib/python3.7/dist-packages (from jsonschema>=2.6->nbformat->notebook->jupyter) (5.10.0)\n",
+            "Requirement already satisfied: pyrsistent!=0.17.0,!=0.17.1,!=0.17.2,>=0.14.0 in /usr/local/lib/python3.7/dist-packages (from jsonschema>=2.6->nbformat->notebook->jupyter) (0.19.2)\n",
+            "Requirement already satisfied: attrs>=17.4.0 in /usr/local/lib/python3.7/dist-packages (from jsonschema>=2.6->nbformat->notebook->jupyter) (22.1.0)\n",
+            "Requirement already satisfied: ptyprocess in /usr/local/lib/python3.7/dist-packages (from terminado>=0.8.1->notebook->jupyter) (0.7.0)\n",
+            "Requirement already satisfied: webencodings in /usr/local/lib/python3.7/dist-packages (from bleach->nbconvert->jupyter) (0.5.1)\n",
+            "Collecting qtpy>=2.0.1\n",
+            "  Downloading QtPy-2.3.0-py3-none-any.whl (83 kB)\n",
+            "\u001b[K     |████████████████████████████████| 83 kB 2.1 MB/s \n",
+            "\u001b[?25hRequirement already satisfied: packaging in /usr/local/lib/python3.7/dist-packages (from qtpy>=2.0.1->qtconsole->jupyter) (21.3)\n",
+            "Installing collected packages: jedi, qtpy, qtconsole, jupyter\n",
+            "Successfully installed jedi-0.18.1 jupyter-1.0.0 qtconsole-5.4.0 qtpy-2.3.0\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "CP6GqtGaHq5w"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%pip install homebrew"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "c0RMVIrpop4d",
+        "outputId": "6adc359f-053d-4914-c3b6-240853170691"
+      },
+      "execution_count": 126,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+            "Collecting homebrew\n",
+            "  Downloading homebrew-0.2.5-py3-none-any.whl (4.8 kB)\n",
+            "Installing collected packages: homebrew\n",
+            "Successfully installed homebrew-0.2.5\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%pip "
+      ],
+      "metadata": {
+        "id": "RXRT5DMopBNb"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%pip install brew"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "w5SfERDEpWXS",
+        "outputId": "45b87198-fff4-4e1d-d25a-fa8035f2db89"
+      },
+      "execution_count": 131,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+            "Collecting brew\n",
+            "  Downloading brew-0.1.4.zip (48 kB)\n",
+            "\u001b[K     |████████████████████████████████| 48 kB 3.4 MB/s \n",
+            "\u001b[33mWARNING: Discarding https://files.pythonhosted.org/packages/71/19/75f6d42ca862c6b31e2da9864d94f59fe81978ac5d40c43937a1c17fd065/brew-0.1.4.zip#sha256=11f23fe972631685e2a146f91747f78bbcad9dd2e20e6ea84a3058459c605948 (from https://pypi.org/simple/brew/). Command errored out with exit status 1: python setup.py egg_info Check the logs for full command output.\u001b[0m\n",
+            "\u001b[?25h  Downloading brew-0.1.3.zip (42 kB)\n",
+            "\u001b[K     |████████████████████████████████| 42 kB 1.1 MB/s \n",
+            "\u001b[?25hBuilding wheels for collected packages: brew\n",
+            "  Building wheel for brew (setup.py) ... \u001b[?25l\u001b[?25hdone\n",
+            "  Created wheel for brew: filename=brew-0.1.3-py2.py3-none-any.whl size=31437 sha256=987855d12acaca34f7b034080e5934c999d51a492c5091946a6b6f1b860ad104\n",
+            "  Stored in directory: /root/.cache/pip/wheels/8a/0a/23/a2e69280bbc6b4dfc90482bf8a43298dbaa77c0723da7d22f9\n",
+            "Successfully built brew\n",
+            "Installing collected packages: brew\n",
+            "Successfully installed brew-0.1.3\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "ls"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "m7tn6fOSpi7F",
+        "outputId": "14b96f9d-a233-47bf-caec-79ac0379f4a0"
+      },
+      "execution_count": 139,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\u001b[0m\u001b[01;34mmodels\u001b[0m/\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%cd models/research/$ protoc object_detection/protos/*.proto --python_out=.$ export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "piqq2PwknZX7",
+        "outputId": "c758dd2c-69b5-4fbd-fa56-aae492bfddf5"
+      },
+      "execution_count": 141,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[Errno 2] No such file or directory: 'models/research/$ protoc object_detection/protos/*.proto --python_out=.$ export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim'\n",
+            "/content/drive/MyDrive/Github/TensorFlow\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!protoc object_detection/protos/*.proto --python_out=.! export PYTHONPATH=!PYTHONPATH:`pwd`:`pwd`/slim"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "p4W1fIDurf0N",
+        "outputId": "ff546d84-66a5-40e6-862c-b199e0b5e542"
+      },
+      "execution_count": 157,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "export: No such file or directory\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!git clone https://github.com/heartexlabs/labelImg.git"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "ze71tT6Bw-ur",
+        "outputId": "65d19707-fd93-42d0-852b-8fd5b224453c"
+      },
+      "execution_count": 162,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Cloning into 'labelImg'...\n",
+            "remote: Enumerating objects: 2097, done.\u001b[K\n",
+            "remote: Counting objects: 100% (7/7), done.\u001b[K\n",
+            "remote: Compressing objects: 100% (7/7), done.\u001b[K\n",
+            "remote: Total 2097 (delta 0), reused 4 (delta 0), pack-reused 2090\u001b[K\n",
+            "Receiving objects: 100% (2097/2097), 237.14 MiB | 17.33 MiB/s, done.\n",
+            "Resolving deltas: 100% (1242/1242), done.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "cd TensorFlow\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "GOYDsdhfzEd2",
+        "outputId": "3a5ee8e4-2a94-4298-e527-2b6022b1a513"
+      },
+      "execution_count": 164,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/drive/MyDrive/Github/TensorFlow\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "protoc object_detection/protos/*.proto --python_out=."
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 134
+        },
+        "id": "Y8MMeg0cHltu",
+        "outputId": "4300157c-8744-4a57-ffaa-1094cee06962"
+      },
+      "execution_count": 165,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-165-dabaaa0aeb70>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    protoc object_detection/protos/*.proto --python_out=.\u001b[0m\n\u001b[0m                          ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install pycocotools"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "2CZ1gwwiHsCH",
+        "outputId": "50cbf87d-d5d1-4d94-f94f-72980382e03a"
+      },
+      "execution_count": 172,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+            "Requirement already satisfied: pycocotools in /usr/local/lib/python3.7/dist-packages (2.0.6)\n",
+            "Requirement already satisfied: numpy in /usr/local/lib/python3.7/dist-packages (from pycocotools) (1.21.6)\n",
+            "Requirement already satisfied: matplotlib>=2.1.0 in /usr/local/lib/python3.7/dist-packages (from pycocotools) (3.2.2)\n",
+            "Requirement already satisfied: kiwisolver>=1.0.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib>=2.1.0->pycocotools) (1.4.4)\n",
+            "Requirement already satisfied: python-dateutil>=2.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib>=2.1.0->pycocotools) (2.8.2)\n",
+            "Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python3.7/dist-packages (from matplotlib>=2.1.0->pycocotools) (0.11.0)\n",
+            "Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,>=2.0.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib>=2.1.0->pycocotools) (3.0.9)\n",
+            "Requirement already satisfied: typing-extensions in /usr/local/lib/python3.7/dist-packages (from kiwisolver>=1.0.1->matplotlib>=2.1.0->pycocotools) (4.1.1)\n",
+            "Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.7/dist-packages (from python-dateutil>=2.1->matplotlib>=2.1.0->pycocotools) (1.15.0)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install TensorFlow==1.15 lxml pillow matplotlib jupyter contextlib2 cython tf_slim"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "hToxj0k-J4Qq",
+        "outputId": "4c7d171d-6fb0-43ac-84fc-e7aaa7f12157"
+      },
+      "execution_count": 182,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+            "Collecting TensorFlow==1.15\n",
+            "  Downloading tensorflow-1.15.0-cp37-cp37m-manylinux2010_x86_64.whl (412.3 MB)\n",
+            "\u001b[K     |████████████████████████████████| 412.3 MB 22 kB/s \n",
+            "\u001b[?25hRequirement already satisfied: lxml in /usr/local/lib/python3.7/dist-packages (4.9.1)\n",
+            "Requirement already satisfied: pillow in /usr/local/lib/python3.7/dist-packages (7.1.2)\n",
+            "Requirement already satisfied: matplotlib in /usr/local/lib/python3.7/dist-packages (3.2.2)\n",
+            "Requirement already satisfied: jupyter in /usr/local/lib/python3.7/dist-packages (1.0.0)\n",
+            "Requirement already satisfied: contextlib2 in /usr/local/lib/python3.7/dist-packages (0.5.5)\n",
+            "Requirement already satisfied: cython in /usr/local/lib/python3.7/dist-packages (0.29.32)\n",
+            "Collecting tf_slim\n",
+            "  Downloading tf_slim-1.1.0-py2.py3-none-any.whl (352 kB)\n",
+            "\u001b[K     |████████████████████████████████| 352 kB 56.0 MB/s \n",
+            "\u001b[?25hCollecting keras-applications>=1.0.8\n",
+            "  Downloading Keras_Applications-1.0.8-py3-none-any.whl (50 kB)\n",
+            "\u001b[K     |████████████████████████████████| 50 kB 5.3 MB/s \n",
+            "\u001b[?25hRequirement already satisfied: astor>=0.6.0 in /usr/local/lib/python3.7/dist-packages (from TensorFlow==1.15) (0.8.1)\n",
+            "Collecting tensorflow-estimator==1.15.1\n",
+            "  Downloading tensorflow_estimator-1.15.1-py2.py3-none-any.whl (503 kB)\n",
+            "\u001b[K     |████████████████████████████████| 503 kB 34.2 MB/s \n",
+            "\u001b[?25hRequirement already satisfied: google-pasta>=0.1.6 in /usr/local/lib/python3.7/dist-packages (from TensorFlow==1.15) (0.2.0)\n",
+            "Requirement already satisfied: termcolor>=1.1.0 in /usr/local/lib/python3.7/dist-packages (from TensorFlow==1.15) (2.1.0)\n",
+            "Requirement already satisfied: wheel>=0.26 in /usr/local/lib/python3.7/dist-packages (from TensorFlow==1.15) (0.38.1)\n",
+            "Requirement already satisfied: keras-preprocessing>=1.0.5 in /usr/local/lib/python3.7/dist-packages (from TensorFlow==1.15) (1.1.2)\n",
+            "Requirement already satisfied: numpy<2.0,>=1.16.0 in /usr/local/lib/python3.7/dist-packages (from TensorFlow==1.15) (1.21.6)\n",
+            "Requirement already satisfied: protobuf>=3.6.1 in /usr/local/lib/python3.7/dist-packages (from TensorFlow==1.15) (3.17.3)\n",
+            "Requirement already satisfied: absl-py>=0.7.0 in /usr/local/lib/python3.7/dist-packages (from TensorFlow==1.15) (1.3.0)\n",
+            "Collecting tensorboard<1.16.0,>=1.15.0\n",
+            "  Downloading tensorboard-1.15.0-py3-none-any.whl (3.8 MB)\n",
+            "\u001b[K     |████████████████████████████████| 3.8 MB 22.9 MB/s \n",
+            "\u001b[?25hCollecting gast==0.2.2\n",
+            "  Downloading gast-0.2.2.tar.gz (10 kB)\n",
+            "Requirement already satisfied: grpcio>=1.8.6 in /usr/local/lib/python3.7/dist-packages (from TensorFlow==1.15) (1.50.0)\n",
+            "Requirement already satisfied: six>=1.10.0 in /usr/local/lib/python3.7/dist-packages (from TensorFlow==1.15) (1.15.0)\n",
+            "Requirement already satisfied: wrapt>=1.11.1 in /usr/local/lib/python3.7/dist-packages (from TensorFlow==1.15) (1.14.1)\n",
+            "Requirement already satisfied: opt-einsum>=2.3.2 in /usr/local/lib/python3.7/dist-packages (from TensorFlow==1.15) (3.3.0)\n",
+            "Requirement already satisfied: h5py in /usr/local/lib/python3.7/dist-packages (from keras-applications>=1.0.8->TensorFlow==1.15) (3.1.0)\n",
+            "Requirement already satisfied: markdown>=2.6.8 in /usr/local/lib/python3.7/dist-packages (from tensorboard<1.16.0,>=1.15.0->TensorFlow==1.15) (3.4.1)\n",
+            "Requirement already satisfied: setuptools>=41.0.0 in /usr/local/lib/python3.7/dist-packages (from tensorboard<1.16.0,>=1.15.0->TensorFlow==1.15) (57.4.0)\n",
+            "Requirement already satisfied: werkzeug>=0.11.15 in /usr/local/lib/python3.7/dist-packages (from tensorboard<1.16.0,>=1.15.0->TensorFlow==1.15) (1.0.1)\n",
+            "Requirement already satisfied: importlib-metadata>=4.4 in /usr/local/lib/python3.7/dist-packages (from markdown>=2.6.8->tensorboard<1.16.0,>=1.15.0->TensorFlow==1.15) (4.13.0)\n",
+            "Requirement already satisfied: zipp>=0.5 in /usr/local/lib/python3.7/dist-packages (from importlib-metadata>=4.4->markdown>=2.6.8->tensorboard<1.16.0,>=1.15.0->TensorFlow==1.15) (3.10.0)\n",
+            "Requirement already satisfied: typing-extensions>=3.6.4 in /usr/local/lib/python3.7/dist-packages (from importlib-metadata>=4.4->markdown>=2.6.8->tensorboard<1.16.0,>=1.15.0->TensorFlow==1.15) (4.1.1)\n",
+            "Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python3.7/dist-packages (from matplotlib) (0.11.0)\n",
+            "Requirement already satisfied: python-dateutil>=2.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib) (2.8.2)\n",
+            "Requirement already satisfied: kiwisolver>=1.0.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib) (1.4.4)\n",
+            "Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,>=2.0.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib) (3.0.9)\n",
+            "Requirement already satisfied: ipykernel in /usr/local/lib/python3.7/dist-packages (from jupyter) (5.3.4)\n",
+            "Requirement already satisfied: nbconvert in /usr/local/lib/python3.7/dist-packages (from jupyter) (5.6.1)\n",
+            "Requirement already satisfied: ipywidgets in /usr/local/lib/python3.7/dist-packages (from jupyter) (7.7.1)\n",
+            "Requirement already satisfied: jupyter-console in /usr/local/lib/python3.7/dist-packages (from jupyter) (6.1.0)\n",
+            "Requirement already satisfied: qtconsole in /usr/local/lib/python3.7/dist-packages (from jupyter) (5.4.0)\n",
+            "Requirement already satisfied: notebook in /usr/local/lib/python3.7/dist-packages (from jupyter) (5.7.16)\n",
+            "Requirement already satisfied: cached-property in /usr/local/lib/python3.7/dist-packages (from h5py->keras-applications>=1.0.8->TensorFlow==1.15) (1.5.2)\n",
+            "Requirement already satisfied: ipython>=5.0.0 in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter) (7.9.0)\n",
+            "Requirement already satisfied: tornado>=4.2 in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter) (6.0.4)\n",
+            "Requirement already satisfied: traitlets>=4.1.0 in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter) (5.1.1)\n",
+            "Requirement already satisfied: jupyter-client in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter) (6.1.12)\n",
+            "Requirement already satisfied: pygments in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (2.6.1)\n",
+            "Requirement already satisfied: prompt-toolkit<2.1.0,>=2.0.0 in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (2.0.10)\n",
+            "Requirement already satisfied: jedi>=0.10 in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (0.18.1)\n",
+            "Requirement already satisfied: pickleshare in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (0.7.5)\n",
+            "Requirement already satisfied: decorator in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (4.4.2)\n",
+            "Requirement already satisfied: backcall in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (0.2.0)\n",
+            "Requirement already satisfied: pexpect in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (4.8.0)\n",
+            "Requirement already satisfied: parso<0.9.0,>=0.8.0 in /usr/local/lib/python3.7/dist-packages (from jedi>=0.10->ipython>=5.0.0->ipykernel->jupyter) (0.8.3)\n",
+            "Requirement already satisfied: wcwidth in /usr/local/lib/python3.7/dist-packages (from prompt-toolkit<2.1.0,>=2.0.0->ipython>=5.0.0->ipykernel->jupyter) (0.2.5)\n",
+            "Requirement already satisfied: widgetsnbextension~=3.6.0 in /usr/local/lib/python3.7/dist-packages (from ipywidgets->jupyter) (3.6.1)\n",
+            "Requirement already satisfied: jupyterlab-widgets>=1.0.0 in /usr/local/lib/python3.7/dist-packages (from ipywidgets->jupyter) (3.0.3)\n",
+            "Requirement already satisfied: ipython-genutils~=0.2.0 in /usr/local/lib/python3.7/dist-packages (from ipywidgets->jupyter) (0.2.0)\n",
+            "Requirement already satisfied: Send2Trash in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (1.8.0)\n",
+            "Requirement already satisfied: prometheus-client in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (0.15.0)\n",
+            "Requirement already satisfied: pyzmq>=17 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (23.2.1)\n",
+            "Requirement already satisfied: jinja2<=3.0.0 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (2.11.3)\n",
+            "Requirement already satisfied: jupyter-core>=4.4.0 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (4.11.2)\n",
+            "Requirement already satisfied: terminado>=0.8.1 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (0.13.3)\n",
+            "Requirement already satisfied: nbformat in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (5.7.0)\n",
+            "Requirement already satisfied: MarkupSafe>=0.23 in /usr/local/lib/python3.7/dist-packages (from jinja2<=3.0.0->notebook->jupyter) (2.0.1)\n",
+            "Requirement already satisfied: testpath in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (0.6.0)\n",
+            "Requirement already satisfied: bleach in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (5.0.1)\n",
+            "Requirement already satisfied: pandocfilters>=1.4.1 in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (1.5.0)\n",
+            "Requirement already satisfied: defusedxml in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (0.7.1)\n",
+            "Requirement already satisfied: entrypoints>=0.2.2 in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (0.4)\n",
+            "Requirement already satisfied: mistune<2,>=0.8.1 in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (0.8.4)\n",
+            "Requirement already satisfied: fastjsonschema in /usr/local/lib/python3.7/dist-packages (from nbformat->notebook->jupyter) (2.16.2)\n",
+            "Requirement already satisfied: jsonschema>=2.6 in /usr/local/lib/python3.7/dist-packages (from nbformat->notebook->jupyter) (4.3.3)\n",
+            "Requirement already satisfied: pyrsistent!=0.17.0,!=0.17.1,!=0.17.2,>=0.14.0 in /usr/local/lib/python3.7/dist-packages (from jsonschema>=2.6->nbformat->notebook->jupyter) (0.19.2)\n",
+            "Requirement already satisfied: importlib-resources>=1.4.0 in /usr/local/lib/python3.7/dist-packages (from jsonschema>=2.6->nbformat->notebook->jupyter) (5.10.0)\n",
+            "Requirement already satisfied: attrs>=17.4.0 in /usr/local/lib/python3.7/dist-packages (from jsonschema>=2.6->nbformat->notebook->jupyter) (22.1.0)\n",
+            "Requirement already satisfied: ptyprocess in /usr/local/lib/python3.7/dist-packages (from terminado>=0.8.1->notebook->jupyter) (0.7.0)\n",
+            "Requirement already satisfied: webencodings in /usr/local/lib/python3.7/dist-packages (from bleach->nbconvert->jupyter) (0.5.1)\n",
+            "Requirement already satisfied: qtpy>=2.0.1 in /usr/local/lib/python3.7/dist-packages (from qtconsole->jupyter) (2.3.0)\n",
+            "Requirement already satisfied: packaging in /usr/local/lib/python3.7/dist-packages (from qtpy>=2.0.1->qtconsole->jupyter) (21.3)\n",
+            "Building wheels for collected packages: gast\n",
+            "  Building wheel for gast (setup.py) ... \u001b[?25l\u001b[?25hdone\n",
+            "  Created wheel for gast: filename=gast-0.2.2-py3-none-any.whl size=7555 sha256=20b42e0303ae967382874cb2fb2381008aa7cbc86c371fc61b068c12885b0ec6\n",
+            "  Stored in directory: /root/.cache/pip/wheels/21/7f/02/420f32a803f7d0967b48dd823da3f558c5166991bfd204eef3\n",
+            "Successfully built gast\n",
+            "Installing collected packages: tensorflow-estimator, tensorboard, keras-applications, gast, tf-slim, TensorFlow\n",
+            "  Attempting uninstall: tensorflow-estimator\n",
+            "    Found existing installation: tensorflow-estimator 2.9.0\n",
+            "    Uninstalling tensorflow-estimator-2.9.0:\n",
+            "      Successfully uninstalled tensorflow-estimator-2.9.0\n",
+            "  Attempting uninstall: tensorboard\n",
+            "    Found existing installation: tensorboard 2.9.1\n",
+            "    Uninstalling tensorboard-2.9.1:\n",
+            "      Successfully uninstalled tensorboard-2.9.1\n",
+            "  Attempting uninstall: gast\n",
+            "    Found existing installation: gast 0.4.0\n",
+            "    Uninstalling gast-0.4.0:\n",
+            "      Successfully uninstalled gast-0.4.0\n",
+            "  Attempting uninstall: TensorFlow\n",
+            "    Found existing installation: tensorflow 2.9.2\n",
+            "    Uninstalling tensorflow-2.9.2:\n",
+            "      Successfully uninstalled tensorflow-2.9.2\n",
+            "\u001b[31mERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\n",
+            "tensorflow-probability 0.17.0 requires gast>=0.3.2, but you have gast 0.2.2 which is incompatible.\n",
+            "kapre 0.3.7 requires tensorflow>=2.0.0, but you have tensorflow 1.15.0 which is incompatible.\u001b[0m\n",
+            "Successfully installed TensorFlow-1.15.0 gast-0.2.2 keras-applications-1.0.8 tensorboard-1.15.0 tensorflow-estimator-1.15.1 tf-slim-1.1.0\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!protoc object_detection/protos/*.proto --python_out=."
+      ],
+      "metadata": {
+        "id": "H4YgmD8qL4UC"
+      },
+      "execution_count": 188,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "cd delf\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "W3Lch4TwOXrK",
+        "outputId": "f83079a2-02f0-47f1-d82d-321a917578ce"
+      },
+      "execution_count": 193,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/drive/MyDrive/Github/TensorFlow/models/research/delf\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!python setup.py build"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "3UlblJsAPvSI",
+        "outputId": "286bf2b0-0cc8-436b-d41d-b8096dd052c3"
+      },
+      "execution_count": 195,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "running build\n",
+            "running build_py\n",
+            "creating build\n",
+            "creating build/lib\n",
+            "creating build/lib/delf\n",
+            "copying delf/__init__.py -> build/lib/delf\n",
+            "creating build/lib/delf/protos\n",
+            "copying delf/protos/__init__.py -> build/lib/delf/protos\n",
+            "creating build/lib/delf/python\n",
+            "copying delf/python/__init__.py -> build/lib/delf/python\n",
+            "copying delf/python/box_io.py -> build/lib/delf/python\n",
+            "copying delf/python/box_io_test.py -> build/lib/delf/python\n",
+            "copying delf/python/datum_io.py -> build/lib/delf/python\n",
+            "copying delf/python/datum_io_test.py -> build/lib/delf/python\n",
+            "copying delf/python/feature_aggregation_extractor.py -> build/lib/delf/python\n",
+            "copying delf/python/feature_aggregation_extractor_test.py -> build/lib/delf/python\n",
+            "copying delf/python/feature_aggregation_similarity.py -> build/lib/delf/python\n",
+            "copying delf/python/feature_aggregation_similarity_test.py -> build/lib/delf/python\n",
+            "copying delf/python/feature_extractor.py -> build/lib/delf/python\n",
+            "copying delf/python/feature_extractor_test.py -> build/lib/delf/python\n",
+            "copying delf/python/feature_io.py -> build/lib/delf/python\n",
+            "copying delf/python/feature_io_test.py -> build/lib/delf/python\n",
+            "copying delf/python/utils.py -> build/lib/delf/python\n",
+            "copying delf/python/utils_test.py -> build/lib/delf/python\n",
+            "copying delf/python/whiten.py -> build/lib/delf/python\n",
+            "copying delf/python/whiten_test.py -> build/lib/delf/python\n",
+            "creating build/lib/delf/python/detect_to_retrieve\n",
+            "copying delf/python/detect_to_retrieve/__init__.py -> build/lib/delf/python/detect_to_retrieve\n",
+            "copying delf/python/detect_to_retrieve/aggregation_extraction.py -> build/lib/delf/python/detect_to_retrieve\n",
+            "copying delf/python/detect_to_retrieve/boxes_and_features_extraction.py -> build/lib/delf/python/detect_to_retrieve\n",
+            "copying delf/python/detect_to_retrieve/cluster_delf_features.py -> build/lib/delf/python/detect_to_retrieve\n",
+            "copying delf/python/detect_to_retrieve/extract_aggregation.py -> build/lib/delf/python/detect_to_retrieve\n",
+            "copying delf/python/detect_to_retrieve/extract_index_boxes_and_features.py -> build/lib/delf/python/detect_to_retrieve\n",
+            "copying delf/python/detect_to_retrieve/extract_query_features.py -> build/lib/delf/python/detect_to_retrieve\n",
+            "copying delf/python/detect_to_retrieve/image_reranking.py -> build/lib/delf/python/detect_to_retrieve\n",
+            "copying delf/python/detect_to_retrieve/perform_retrieval.py -> build/lib/delf/python/detect_to_retrieve\n",
+            "creating build/lib/delf/python/examples\n",
+            "copying delf/python/examples/__init__.py -> build/lib/delf/python/examples\n",
+            "copying delf/python/examples/detector.py -> build/lib/delf/python/examples\n",
+            "copying delf/python/examples/extract_boxes.py -> build/lib/delf/python/examples\n",
+            "copying delf/python/examples/extract_features.py -> build/lib/delf/python/examples\n",
+            "copying delf/python/examples/extractor.py -> build/lib/delf/python/examples\n",
+            "copying delf/python/examples/match_images.py -> build/lib/delf/python/examples\n",
+            "creating build/lib/delf/python/normalization_layers\n",
+            "copying delf/python/normalization_layers/__init__.py -> build/lib/delf/python/normalization_layers\n",
+            "copying delf/python/normalization_layers/normalization.py -> build/lib/delf/python/normalization_layers\n",
+            "copying delf/python/normalization_layers/normalization_test.py -> build/lib/delf/python/normalization_layers\n",
+            "creating build/lib/delf/python/pooling_layers\n",
+            "copying delf/python/pooling_layers/__init__.py -> build/lib/delf/python/pooling_layers\n",
+            "copying delf/python/pooling_layers/pooling.py -> build/lib/delf/python/pooling_layers\n",
+            "copying delf/python/pooling_layers/pooling_test.py -> build/lib/delf/python/pooling_layers\n",
+            "creating build/lib/delf/python/training\n",
+            "copying delf/python/training/__init__.py -> build/lib/delf/python/training\n",
+            "copying delf/python/training/build_image_dataset.py -> build/lib/delf/python/training\n",
+            "copying delf/python/training/global_features_utils.py -> build/lib/delf/python/training\n",
+            "copying delf/python/training/tensorboard_utils.py -> build/lib/delf/python/training\n",
+            "copying delf/python/training/train.py -> build/lib/delf/python/training\n",
+            "creating build/lib/delf/python/training/global_features\n",
+            "copying delf/python/training/global_features/__init__.py -> build/lib/delf/python/training/global_features\n",
+            "copying delf/python/training/global_features/train.py -> build/lib/delf/python/training/global_features\n",
+            "copying delf/python/training/global_features/train_utils.py -> build/lib/delf/python/training/global_features\n",
+            "creating build/lib/delf/python/training/losses\n",
+            "copying delf/python/training/losses/__init__.py -> build/lib/delf/python/training/losses\n",
+            "copying delf/python/training/losses/ranking_losses.py -> build/lib/delf/python/training/losses\n",
+            "copying delf/python/training/losses/ranking_losses_test.py -> build/lib/delf/python/training/losses\n",
+            "creating build/lib/delf/python/training/model\n",
+            "copying delf/python/training/model/__init__.py -> build/lib/delf/python/training/model\n",
+            "copying delf/python/training/model/delf_model.py -> build/lib/delf/python/training/model\n",
+            "copying delf/python/training/model/delf_model_test.py -> build/lib/delf/python/training/model\n",
+            "copying delf/python/training/model/delg_model.py -> build/lib/delf/python/training/model\n",
+            "copying delf/python/training/model/delg_model_test.py -> build/lib/delf/python/training/model\n",
+            "copying delf/python/training/model/export_CNN_global.py -> build/lib/delf/python/training/model\n",
+            "copying delf/python/training/model/export_global_model.py -> build/lib/delf/python/training/model\n",
+            "copying delf/python/training/model/export_local_and_global_model.py -> build/lib/delf/python/training/model\n",
+            "copying delf/python/training/model/export_local_model.py -> build/lib/delf/python/training/model\n",
+            "copying delf/python/training/model/export_model_utils.py -> build/lib/delf/python/training/model\n",
+            "copying delf/python/training/model/global_model.py -> build/lib/delf/python/training/model\n",
+            "copying delf/python/training/model/global_model_test.py -> build/lib/delf/python/training/model\n",
+            "copying delf/python/training/model/resnet50.py -> build/lib/delf/python/training/model\n",
+            "running egg_info\n",
+            "creating delf.egg-info\n",
+            "writing delf.egg-info/PKG-INFO\n",
+            "writing dependency_links to delf.egg-info/dependency_links.txt\n",
+            "writing requirements to delf.egg-info/requires.txt\n",
+            "writing top-level names to delf.egg-info/top_level.txt\n",
+            "writing manifest file 'delf.egg-info/SOURCES.txt'\n",
+            "writing manifest file 'delf.egg-info/SOURCES.txt'\n",
+            "copying delf/protos/aggregation_config.proto -> build/lib/delf/protos\n",
+            "copying delf/protos/box.proto -> build/lib/delf/protos\n",
+            "copying delf/protos/datum.proto -> build/lib/delf/protos\n",
+            "copying delf/protos/delf_config.proto -> build/lib/delf/protos\n",
+            "copying delf/protos/feature.proto -> build/lib/delf/protos\n",
+            "creating build/lib/delf/python/datasets\n",
+            "copying delf/python/datasets/generic_dataset.py -> build/lib/delf/python/datasets\n",
+            "copying delf/python/datasets/generic_dataset_test.py -> build/lib/delf/python/datasets\n",
+            "copying delf/python/datasets/tuples_dataset.py -> build/lib/delf/python/datasets\n",
+            "copying delf/python/datasets/tuples_dataset_test.py -> build/lib/delf/python/datasets\n",
+            "copying delf/python/datasets/utils.py -> build/lib/delf/python/datasets\n",
+            "copying delf/python/datasets/utils_test.py -> build/lib/delf/python/datasets\n",
+            "creating build/lib/delf/python/datasets/google_landmarks_dataset\n",
+            "copying delf/python/datasets/google_landmarks_dataset/README.md -> build/lib/delf/python/datasets/google_landmarks_dataset\n",
+            "copying delf/python/datasets/google_landmarks_dataset/__init__.py -> build/lib/delf/python/datasets/google_landmarks_dataset\n",
+            "copying delf/python/datasets/google_landmarks_dataset/compute_recognition_metrics.py -> build/lib/delf/python/datasets/google_landmarks_dataset\n",
+            "copying delf/python/datasets/google_landmarks_dataset/compute_retrieval_metrics.py -> build/lib/delf/python/datasets/google_landmarks_dataset\n",
+            "copying delf/python/datasets/google_landmarks_dataset/dataset_file_io.py -> build/lib/delf/python/datasets/google_landmarks_dataset\n",
+            "copying delf/python/datasets/google_landmarks_dataset/dataset_file_io_test.py -> build/lib/delf/python/datasets/google_landmarks_dataset\n",
+            "copying delf/python/datasets/google_landmarks_dataset/googlelandmarks.py -> build/lib/delf/python/datasets/google_landmarks_dataset\n",
+            "copying delf/python/datasets/google_landmarks_dataset/metrics.py -> build/lib/delf/python/datasets/google_landmarks_dataset\n",
+            "copying delf/python/datasets/google_landmarks_dataset/metrics_test.py -> build/lib/delf/python/datasets/google_landmarks_dataset\n",
+            "copying delf/python/datasets/google_landmarks_dataset/rn101_af_gldv2clean_config.pbtxt -> build/lib/delf/python/datasets/google_landmarks_dataset\n",
+            "creating build/lib/delf/python/datasets/revisited_op\n",
+            "copying delf/python/datasets/revisited_op/__init__.py -> build/lib/delf/python/datasets/revisited_op\n",
+            "copying delf/python/datasets/revisited_op/dataset.py -> build/lib/delf/python/datasets/revisited_op\n",
+            "copying delf/python/datasets/revisited_op/dataset_test.py -> build/lib/delf/python/datasets/revisited_op\n",
+            "creating build/lib/delf/python/datasets/sfm120k\n",
+            "copying delf/python/datasets/sfm120k/__init__.py -> build/lib/delf/python/datasets/sfm120k\n",
+            "copying delf/python/datasets/sfm120k/dataset_download.py -> build/lib/delf/python/datasets/sfm120k\n",
+            "copying delf/python/datasets/sfm120k/sfm120k.py -> build/lib/delf/python/datasets/sfm120k\n",
+            "copying delf/python/datasets/sfm120k/sfm120k_test.py -> build/lib/delf/python/datasets/sfm120k\n",
+            "creating build/lib/delf/python/delg\n",
+            "copying delf/python/delg/DELG_INSTRUCTIONS.md -> build/lib/delf/python/delg\n",
+            "copying delf/python/delg/extract_features.py -> build/lib/delf/python/delg\n",
+            "copying delf/python/delg/measure_latency.py -> build/lib/delf/python/delg\n",
+            "copying delf/python/delg/perform_retrieval.py -> build/lib/delf/python/delg\n",
+            "copying delf/python/delg/r101delg_gld_config.pbtxt -> build/lib/delf/python/delg\n",
+            "copying delf/python/delg/r101delg_gldv2clean_config.pbtxt -> build/lib/delf/python/delg\n",
+            "copying delf/python/delg/r50delg_gld_config.pbtxt -> build/lib/delf/python/delg\n",
+            "copying delf/python/delg/r50delg_gldv2clean_config.pbtxt -> build/lib/delf/python/delg\n",
+            "copying delf/python/detect_to_retrieve/DETECT_TO_RETRIEVE_INSTRUCTIONS.md -> build/lib/delf/python/detect_to_retrieve\n",
+            "copying delf/python/detect_to_retrieve/delf_gld_config.pbtxt -> build/lib/delf/python/detect_to_retrieve\n",
+            "copying delf/python/detect_to_retrieve/index_aggregation_config.pbtxt -> build/lib/delf/python/detect_to_retrieve\n",
+            "copying delf/python/detect_to_retrieve/query_aggregation_config.pbtxt -> build/lib/delf/python/detect_to_retrieve\n",
+            "copying delf/python/examples/delf_config_example.pbtxt -> build/lib/delf/python/examples\n",
+            "copying delf/python/examples/detection_example_1.jpg -> build/lib/delf/python/examples\n",
+            "copying delf/python/examples/detection_example_2.jpg -> build/lib/delf/python/examples\n",
+            "copying delf/python/examples/matched_images_example.jpg -> build/lib/delf/python/examples\n",
+            "copying delf/python/training/README.md -> build/lib/delf/python/training\n",
+            "copying delf/python/training/download_dataset.sh -> build/lib/delf/python/training\n",
+            "copying delf/python/training/install_delf.sh -> build/lib/delf/python/training\n",
+            "copying delf/python/training/matched_images_demo.png -> build/lib/delf/python/training\n",
+            "copying delf/python/training/global_features/README.md -> build/lib/delf/python/training/global_features\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!python setup.py install"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "H2pLPcj4P-ut",
+        "outputId": "baab5b80-9970-476c-be65-d7abfa2cbcad"
+      },
+      "execution_count": 196,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "running install\n",
+            "running bdist_egg\n",
+            "running egg_info\n",
+            "writing delf.egg-info/PKG-INFO\n",
+            "writing dependency_links to delf.egg-info/dependency_links.txt\n",
+            "writing requirements to delf.egg-info/requires.txt\n",
+            "writing top-level names to delf.egg-info/top_level.txt\n",
+            "writing manifest file 'delf.egg-info/SOURCES.txt'\n",
+            "installing library code to build/bdist.linux-x86_64/egg\n",
+            "running install_lib\n",
+            "running build_py\n",
+            "creating build/bdist.linux-x86_64\n",
+            "creating build/bdist.linux-x86_64/egg\n",
+            "creating build/bdist.linux-x86_64/egg/delf\n",
+            "copying build/lib/delf/__init__.py -> build/bdist.linux-x86_64/egg/delf\n",
+            "creating build/bdist.linux-x86_64/egg/delf/protos\n",
+            "copying build/lib/delf/protos/__init__.py -> build/bdist.linux-x86_64/egg/delf/protos\n",
+            "copying build/lib/delf/protos/aggregation_config.proto -> build/bdist.linux-x86_64/egg/delf/protos\n",
+            "copying build/lib/delf/protos/box.proto -> build/bdist.linux-x86_64/egg/delf/protos\n",
+            "copying build/lib/delf/protos/datum.proto -> build/bdist.linux-x86_64/egg/delf/protos\n",
+            "copying build/lib/delf/protos/delf_config.proto -> build/bdist.linux-x86_64/egg/delf/protos\n",
+            "copying build/lib/delf/protos/feature.proto -> build/bdist.linux-x86_64/egg/delf/protos\n",
+            "creating build/bdist.linux-x86_64/egg/delf/python\n",
+            "copying build/lib/delf/python/__init__.py -> build/bdist.linux-x86_64/egg/delf/python\n",
+            "copying build/lib/delf/python/box_io.py -> build/bdist.linux-x86_64/egg/delf/python\n",
+            "copying build/lib/delf/python/box_io_test.py -> build/bdist.linux-x86_64/egg/delf/python\n",
+            "copying build/lib/delf/python/datum_io.py -> build/bdist.linux-x86_64/egg/delf/python\n",
+            "copying build/lib/delf/python/datum_io_test.py -> build/bdist.linux-x86_64/egg/delf/python\n",
+            "copying build/lib/delf/python/feature_aggregation_extractor.py -> build/bdist.linux-x86_64/egg/delf/python\n",
+            "copying build/lib/delf/python/feature_aggregation_extractor_test.py -> build/bdist.linux-x86_64/egg/delf/python\n",
+            "copying build/lib/delf/python/feature_aggregation_similarity.py -> build/bdist.linux-x86_64/egg/delf/python\n",
+            "copying build/lib/delf/python/feature_aggregation_similarity_test.py -> build/bdist.linux-x86_64/egg/delf/python\n",
+            "copying build/lib/delf/python/feature_extractor.py -> build/bdist.linux-x86_64/egg/delf/python\n",
+            "copying build/lib/delf/python/feature_extractor_test.py -> build/bdist.linux-x86_64/egg/delf/python\n",
+            "copying build/lib/delf/python/feature_io.py -> build/bdist.linux-x86_64/egg/delf/python\n",
+            "copying build/lib/delf/python/feature_io_test.py -> build/bdist.linux-x86_64/egg/delf/python\n",
+            "copying build/lib/delf/python/utils.py -> build/bdist.linux-x86_64/egg/delf/python\n",
+            "copying build/lib/delf/python/utils_test.py -> build/bdist.linux-x86_64/egg/delf/python\n",
+            "copying build/lib/delf/python/whiten.py -> build/bdist.linux-x86_64/egg/delf/python\n",
+            "copying build/lib/delf/python/whiten_test.py -> build/bdist.linux-x86_64/egg/delf/python\n",
+            "creating build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve\n",
+            "copying build/lib/delf/python/detect_to_retrieve/__init__.py -> build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve\n",
+            "copying build/lib/delf/python/detect_to_retrieve/aggregation_extraction.py -> build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve\n",
+            "copying build/lib/delf/python/detect_to_retrieve/boxes_and_features_extraction.py -> build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve\n",
+            "copying build/lib/delf/python/detect_to_retrieve/cluster_delf_features.py -> build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve\n",
+            "copying build/lib/delf/python/detect_to_retrieve/extract_aggregation.py -> build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve\n",
+            "copying build/lib/delf/python/detect_to_retrieve/extract_index_boxes_and_features.py -> build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve\n",
+            "copying build/lib/delf/python/detect_to_retrieve/extract_query_features.py -> build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve\n",
+            "copying build/lib/delf/python/detect_to_retrieve/image_reranking.py -> build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve\n",
+            "copying build/lib/delf/python/detect_to_retrieve/perform_retrieval.py -> build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve\n",
+            "copying build/lib/delf/python/detect_to_retrieve/DETECT_TO_RETRIEVE_INSTRUCTIONS.md -> build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve\n",
+            "copying build/lib/delf/python/detect_to_retrieve/delf_gld_config.pbtxt -> build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve\n",
+            "copying build/lib/delf/python/detect_to_retrieve/index_aggregation_config.pbtxt -> build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve\n",
+            "copying build/lib/delf/python/detect_to_retrieve/query_aggregation_config.pbtxt -> build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve\n",
+            "creating build/bdist.linux-x86_64/egg/delf/python/examples\n",
+            "copying build/lib/delf/python/examples/__init__.py -> build/bdist.linux-x86_64/egg/delf/python/examples\n",
+            "copying build/lib/delf/python/examples/detector.py -> build/bdist.linux-x86_64/egg/delf/python/examples\n",
+            "copying build/lib/delf/python/examples/extract_boxes.py -> build/bdist.linux-x86_64/egg/delf/python/examples\n",
+            "copying build/lib/delf/python/examples/extract_features.py -> build/bdist.linux-x86_64/egg/delf/python/examples\n",
+            "copying build/lib/delf/python/examples/extractor.py -> build/bdist.linux-x86_64/egg/delf/python/examples\n",
+            "copying build/lib/delf/python/examples/match_images.py -> build/bdist.linux-x86_64/egg/delf/python/examples\n",
+            "copying build/lib/delf/python/examples/delf_config_example.pbtxt -> build/bdist.linux-x86_64/egg/delf/python/examples\n",
+            "copying build/lib/delf/python/examples/detection_example_1.jpg -> build/bdist.linux-x86_64/egg/delf/python/examples\n",
+            "copying build/lib/delf/python/examples/detection_example_2.jpg -> build/bdist.linux-x86_64/egg/delf/python/examples\n",
+            "copying build/lib/delf/python/examples/matched_images_example.jpg -> build/bdist.linux-x86_64/egg/delf/python/examples\n",
+            "creating build/bdist.linux-x86_64/egg/delf/python/normalization_layers\n",
+            "copying build/lib/delf/python/normalization_layers/__init__.py -> build/bdist.linux-x86_64/egg/delf/python/normalization_layers\n",
+            "copying build/lib/delf/python/normalization_layers/normalization.py -> build/bdist.linux-x86_64/egg/delf/python/normalization_layers\n",
+            "copying build/lib/delf/python/normalization_layers/normalization_test.py -> build/bdist.linux-x86_64/egg/delf/python/normalization_layers\n",
+            "creating build/bdist.linux-x86_64/egg/delf/python/pooling_layers\n",
+            "copying build/lib/delf/python/pooling_layers/__init__.py -> build/bdist.linux-x86_64/egg/delf/python/pooling_layers\n",
+            "copying build/lib/delf/python/pooling_layers/pooling.py -> build/bdist.linux-x86_64/egg/delf/python/pooling_layers\n",
+            "copying build/lib/delf/python/pooling_layers/pooling_test.py -> build/bdist.linux-x86_64/egg/delf/python/pooling_layers\n",
+            "creating build/bdist.linux-x86_64/egg/delf/python/training\n",
+            "copying build/lib/delf/python/training/__init__.py -> build/bdist.linux-x86_64/egg/delf/python/training\n",
+            "copying build/lib/delf/python/training/build_image_dataset.py -> build/bdist.linux-x86_64/egg/delf/python/training\n",
+            "copying build/lib/delf/python/training/global_features_utils.py -> build/bdist.linux-x86_64/egg/delf/python/training\n",
+            "copying build/lib/delf/python/training/tensorboard_utils.py -> build/bdist.linux-x86_64/egg/delf/python/training\n",
+            "copying build/lib/delf/python/training/train.py -> build/bdist.linux-x86_64/egg/delf/python/training\n",
+            "creating build/bdist.linux-x86_64/egg/delf/python/training/global_features\n",
+            "copying build/lib/delf/python/training/global_features/__init__.py -> build/bdist.linux-x86_64/egg/delf/python/training/global_features\n",
+            "copying build/lib/delf/python/training/global_features/train.py -> build/bdist.linux-x86_64/egg/delf/python/training/global_features\n",
+            "copying build/lib/delf/python/training/global_features/train_utils.py -> build/bdist.linux-x86_64/egg/delf/python/training/global_features\n",
+            "copying build/lib/delf/python/training/global_features/README.md -> build/bdist.linux-x86_64/egg/delf/python/training/global_features\n",
+            "creating build/bdist.linux-x86_64/egg/delf/python/training/losses\n",
+            "copying build/lib/delf/python/training/losses/__init__.py -> build/bdist.linux-x86_64/egg/delf/python/training/losses\n",
+            "copying build/lib/delf/python/training/losses/ranking_losses.py -> build/bdist.linux-x86_64/egg/delf/python/training/losses\n",
+            "copying build/lib/delf/python/training/losses/ranking_losses_test.py -> build/bdist.linux-x86_64/egg/delf/python/training/losses\n",
+            "creating build/bdist.linux-x86_64/egg/delf/python/training/model\n",
+            "copying build/lib/delf/python/training/model/__init__.py -> build/bdist.linux-x86_64/egg/delf/python/training/model\n",
+            "copying build/lib/delf/python/training/model/delf_model.py -> build/bdist.linux-x86_64/egg/delf/python/training/model\n",
+            "copying build/lib/delf/python/training/model/delf_model_test.py -> build/bdist.linux-x86_64/egg/delf/python/training/model\n",
+            "copying build/lib/delf/python/training/model/delg_model.py -> build/bdist.linux-x86_64/egg/delf/python/training/model\n",
+            "copying build/lib/delf/python/training/model/delg_model_test.py -> build/bdist.linux-x86_64/egg/delf/python/training/model\n",
+            "copying build/lib/delf/python/training/model/export_CNN_global.py -> build/bdist.linux-x86_64/egg/delf/python/training/model\n",
+            "copying build/lib/delf/python/training/model/export_global_model.py -> build/bdist.linux-x86_64/egg/delf/python/training/model\n",
+            "copying build/lib/delf/python/training/model/export_local_and_global_model.py -> build/bdist.linux-x86_64/egg/delf/python/training/model\n",
+            "copying build/lib/delf/python/training/model/export_local_model.py -> build/bdist.linux-x86_64/egg/delf/python/training/model\n",
+            "copying build/lib/delf/python/training/model/export_model_utils.py -> build/bdist.linux-x86_64/egg/delf/python/training/model\n",
+            "copying build/lib/delf/python/training/model/global_model.py -> build/bdist.linux-x86_64/egg/delf/python/training/model\n",
+            "copying build/lib/delf/python/training/model/global_model_test.py -> build/bdist.linux-x86_64/egg/delf/python/training/model\n",
+            "copying build/lib/delf/python/training/model/resnet50.py -> build/bdist.linux-x86_64/egg/delf/python/training/model\n",
+            "copying build/lib/delf/python/training/README.md -> build/bdist.linux-x86_64/egg/delf/python/training\n",
+            "copying build/lib/delf/python/training/download_dataset.sh -> build/bdist.linux-x86_64/egg/delf/python/training\n",
+            "copying build/lib/delf/python/training/install_delf.sh -> build/bdist.linux-x86_64/egg/delf/python/training\n",
+            "copying build/lib/delf/python/training/matched_images_demo.png -> build/bdist.linux-x86_64/egg/delf/python/training\n",
+            "creating build/bdist.linux-x86_64/egg/delf/python/datasets\n",
+            "copying build/lib/delf/python/datasets/generic_dataset.py -> build/bdist.linux-x86_64/egg/delf/python/datasets\n",
+            "copying build/lib/delf/python/datasets/generic_dataset_test.py -> build/bdist.linux-x86_64/egg/delf/python/datasets\n",
+            "copying build/lib/delf/python/datasets/tuples_dataset.py -> build/bdist.linux-x86_64/egg/delf/python/datasets\n",
+            "copying build/lib/delf/python/datasets/tuples_dataset_test.py -> build/bdist.linux-x86_64/egg/delf/python/datasets\n",
+            "copying build/lib/delf/python/datasets/utils.py -> build/bdist.linux-x86_64/egg/delf/python/datasets\n",
+            "copying build/lib/delf/python/datasets/utils_test.py -> build/bdist.linux-x86_64/egg/delf/python/datasets\n",
+            "creating build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset\n",
+            "copying build/lib/delf/python/datasets/google_landmarks_dataset/README.md -> build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset\n",
+            "copying build/lib/delf/python/datasets/google_landmarks_dataset/__init__.py -> build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset\n",
+            "copying build/lib/delf/python/datasets/google_landmarks_dataset/compute_recognition_metrics.py -> build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset\n",
+            "copying build/lib/delf/python/datasets/google_landmarks_dataset/compute_retrieval_metrics.py -> build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset\n",
+            "copying build/lib/delf/python/datasets/google_landmarks_dataset/dataset_file_io.py -> build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset\n",
+            "copying build/lib/delf/python/datasets/google_landmarks_dataset/dataset_file_io_test.py -> build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset\n",
+            "copying build/lib/delf/python/datasets/google_landmarks_dataset/googlelandmarks.py -> build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset\n",
+            "copying build/lib/delf/python/datasets/google_landmarks_dataset/metrics.py -> build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset\n",
+            "copying build/lib/delf/python/datasets/google_landmarks_dataset/metrics_test.py -> build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset\n",
+            "copying build/lib/delf/python/datasets/google_landmarks_dataset/rn101_af_gldv2clean_config.pbtxt -> build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset\n",
+            "creating build/bdist.linux-x86_64/egg/delf/python/datasets/revisited_op\n",
+            "copying build/lib/delf/python/datasets/revisited_op/__init__.py -> build/bdist.linux-x86_64/egg/delf/python/datasets/revisited_op\n",
+            "copying build/lib/delf/python/datasets/revisited_op/dataset.py -> build/bdist.linux-x86_64/egg/delf/python/datasets/revisited_op\n",
+            "copying build/lib/delf/python/datasets/revisited_op/dataset_test.py -> build/bdist.linux-x86_64/egg/delf/python/datasets/revisited_op\n",
+            "creating build/bdist.linux-x86_64/egg/delf/python/datasets/sfm120k\n",
+            "copying build/lib/delf/python/datasets/sfm120k/__init__.py -> build/bdist.linux-x86_64/egg/delf/python/datasets/sfm120k\n",
+            "copying build/lib/delf/python/datasets/sfm120k/dataset_download.py -> build/bdist.linux-x86_64/egg/delf/python/datasets/sfm120k\n",
+            "copying build/lib/delf/python/datasets/sfm120k/sfm120k.py -> build/bdist.linux-x86_64/egg/delf/python/datasets/sfm120k\n",
+            "copying build/lib/delf/python/datasets/sfm120k/sfm120k_test.py -> build/bdist.linux-x86_64/egg/delf/python/datasets/sfm120k\n",
+            "creating build/bdist.linux-x86_64/egg/delf/python/delg\n",
+            "copying build/lib/delf/python/delg/DELG_INSTRUCTIONS.md -> build/bdist.linux-x86_64/egg/delf/python/delg\n",
+            "copying build/lib/delf/python/delg/extract_features.py -> build/bdist.linux-x86_64/egg/delf/python/delg\n",
+            "copying build/lib/delf/python/delg/measure_latency.py -> build/bdist.linux-x86_64/egg/delf/python/delg\n",
+            "copying build/lib/delf/python/delg/perform_retrieval.py -> build/bdist.linux-x86_64/egg/delf/python/delg\n",
+            "copying build/lib/delf/python/delg/r101delg_gld_config.pbtxt -> build/bdist.linux-x86_64/egg/delf/python/delg\n",
+            "copying build/lib/delf/python/delg/r101delg_gldv2clean_config.pbtxt -> build/bdist.linux-x86_64/egg/delf/python/delg\n",
+            "copying build/lib/delf/python/delg/r50delg_gld_config.pbtxt -> build/bdist.linux-x86_64/egg/delf/python/delg\n",
+            "copying build/lib/delf/python/delg/r50delg_gldv2clean_config.pbtxt -> build/bdist.linux-x86_64/egg/delf/python/delg\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/__init__.py to __init__.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/protos/__init__.py to __init__.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/__init__.py to __init__.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/box_io.py to box_io.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/box_io_test.py to box_io_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datum_io.py to datum_io.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datum_io_test.py to datum_io_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/feature_aggregation_extractor.py to feature_aggregation_extractor.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/feature_aggregation_extractor_test.py to feature_aggregation_extractor_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/feature_aggregation_similarity.py to feature_aggregation_similarity.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/feature_aggregation_similarity_test.py to feature_aggregation_similarity_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/feature_extractor.py to feature_extractor.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/feature_extractor_test.py to feature_extractor_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/feature_io.py to feature_io.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/feature_io_test.py to feature_io_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/utils.py to utils.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/utils_test.py to utils_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/whiten.py to whiten.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/whiten_test.py to whiten_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve/__init__.py to __init__.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve/aggregation_extraction.py to aggregation_extraction.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve/boxes_and_features_extraction.py to boxes_and_features_extraction.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve/cluster_delf_features.py to cluster_delf_features.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve/extract_aggregation.py to extract_aggregation.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve/extract_index_boxes_and_features.py to extract_index_boxes_and_features.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve/extract_query_features.py to extract_query_features.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve/image_reranking.py to image_reranking.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/detect_to_retrieve/perform_retrieval.py to perform_retrieval.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/examples/__init__.py to __init__.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/examples/detector.py to detector.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/examples/extract_boxes.py to extract_boxes.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/examples/extract_features.py to extract_features.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/examples/extractor.py to extractor.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/examples/match_images.py to match_images.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/normalization_layers/__init__.py to __init__.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/normalization_layers/normalization.py to normalization.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/normalization_layers/normalization_test.py to normalization_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/pooling_layers/__init__.py to __init__.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/pooling_layers/pooling.py to pooling.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/pooling_layers/pooling_test.py to pooling_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/__init__.py to __init__.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/build_image_dataset.py to build_image_dataset.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/global_features_utils.py to global_features_utils.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/tensorboard_utils.py to tensorboard_utils.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/train.py to train.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/global_features/__init__.py to __init__.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/global_features/train.py to train.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/global_features/train_utils.py to train_utils.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/losses/__init__.py to __init__.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/losses/ranking_losses.py to ranking_losses.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/losses/ranking_losses_test.py to ranking_losses_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/model/__init__.py to __init__.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/model/delf_model.py to delf_model.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/model/delf_model_test.py to delf_model_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/model/delg_model.py to delg_model.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/model/delg_model_test.py to delg_model_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/model/export_CNN_global.py to export_CNN_global.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/model/export_global_model.py to export_global_model.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/model/export_local_and_global_model.py to export_local_and_global_model.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/model/export_local_model.py to export_local_model.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/model/export_model_utils.py to export_model_utils.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/model/global_model.py to global_model.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/model/global_model_test.py to global_model_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/training/model/resnet50.py to resnet50.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/generic_dataset.py to generic_dataset.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/generic_dataset_test.py to generic_dataset_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/tuples_dataset.py to tuples_dataset.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/tuples_dataset_test.py to tuples_dataset_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/utils.py to utils.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/utils_test.py to utils_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset/__init__.py to __init__.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset/compute_recognition_metrics.py to compute_recognition_metrics.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset/compute_retrieval_metrics.py to compute_retrieval_metrics.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset/dataset_file_io.py to dataset_file_io.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset/dataset_file_io_test.py to dataset_file_io_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset/googlelandmarks.py to googlelandmarks.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset/metrics.py to metrics.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/google_landmarks_dataset/metrics_test.py to metrics_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/revisited_op/__init__.py to __init__.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/revisited_op/dataset.py to dataset.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/revisited_op/dataset_test.py to dataset_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/sfm120k/__init__.py to __init__.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/sfm120k/dataset_download.py to dataset_download.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/sfm120k/sfm120k.py to sfm120k.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/datasets/sfm120k/sfm120k_test.py to sfm120k_test.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/delg/extract_features.py to extract_features.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/delg/measure_latency.py to measure_latency.cpython-37.pyc\n",
+            "byte-compiling build/bdist.linux-x86_64/egg/delf/python/delg/perform_retrieval.py to perform_retrieval.cpython-37.pyc\n",
+            "creating build/bdist.linux-x86_64/egg/EGG-INFO\n",
+            "copying delf.egg-info/PKG-INFO -> build/bdist.linux-x86_64/egg/EGG-INFO\n",
+            "copying delf.egg-info/SOURCES.txt -> build/bdist.linux-x86_64/egg/EGG-INFO\n",
+            "copying delf.egg-info/dependency_links.txt -> build/bdist.linux-x86_64/egg/EGG-INFO\n",
+            "copying delf.egg-info/requires.txt -> build/bdist.linux-x86_64/egg/EGG-INFO\n",
+            "copying delf.egg-info/top_level.txt -> build/bdist.linux-x86_64/egg/EGG-INFO\n",
+            "zip_safe flag not set; analyzing archive contents...\n",
+            "delf.python.__pycache__.whiten.cpython-37: module references __file__\n",
+            "creating dist\n",
+            "creating 'dist/delf-2.0-py3.7.egg' and adding 'build/bdist.linux-x86_64/egg' to it\n",
+            "removing 'build/bdist.linux-x86_64/egg' (and everything under it)\n",
+            "Processing delf-2.0-py3.7.egg\n",
+            "creating /usr/local/lib/python3.7/dist-packages/delf-2.0-py3.7.egg\n",
+            "Extracting delf-2.0-py3.7.egg to /usr/local/lib/python3.7/dist-packages\n",
+            "Adding delf 2.0 to easy-install.pth file\n",
+            "\n",
+            "Installed /usr/local/lib/python3.7/dist-packages/delf-2.0-py3.7.egg\n",
+            "Processing dependencies for delf==2.0\n",
+            "Searching for tensorflow>=2.2.0\n",
+            "Reading https://pypi.org/simple/tensorflow/\n",
+            "Downloading https://files.pythonhosted.org/packages/79/16/187874d612e98d48084ed2752dcadc00ccdfccabc8cec798515ea539598d/tensorflow-2.11.0rc2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl#sha256=285965fe400c44e2e1eb55accb8432a5f3aeb70b4bb9e93a63d6f90dc0a79a81\n",
+            "Best match: tensorflow 2.11.0rc2\n",
+            "Processing tensorflow-2.11.0rc2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl\n",
+            "Installing tensorflow-2.11.0rc2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl to /usr/local/lib/python3.7/dist-packages\n",
+            "Adding tensorflow 2.11.0rc2 to easy-install.pth file\n",
+            "Installing estimator_ckpt_converter script to /usr/local/bin\n",
+            "Installing import_pb_to_tensorboard script to /usr/local/bin\n",
+            "Installing saved_model_cli script to /usr/local/bin\n",
+            "Installing tensorboard script to /usr/local/bin\n",
+            "Installing tf_upgrade_v2 script to /usr/local/bin\n",
+            "Installing tflite_convert script to /usr/local/bin\n",
+            "Installing toco script to /usr/local/bin\n",
+            "Installing toco_from_protos script to /usr/local/bin\n",
+            "\n",
+            "Installed /usr/local/lib/python3.7/dist-packages/tensorflow-2.11.0rc2-py3.7-linux-x86_64.egg\n",
+            "Searching for gast>=0.3.2\n",
+            "Reading https://pypi.org/simple/gast/\n",
+            "Downloading https://files.pythonhosted.org/packages/5f/1c/b59500a88c5c3d9d601c5ca62b9df5e0964764472faed82a182958a922c5/gast-0.5.3-py3-none-any.whl#sha256=211aac1e58c167b25d3504998f2db694454a24bb1fb1225bce99420166f21d6a\n",
+            "Best match: gast 0.5.3\n",
+            "Processing gast-0.5.3-py3-none-any.whl\n",
+            "Installing gast-0.5.3-py3-none-any.whl to /usr/local/lib/python3.7/dist-packages\n",
+            "Adding gast 0.5.3 to easy-install.pth file\n",
+            "\n",
+            "Installed /usr/local/lib/python3.7/dist-packages/gast-0.5.3-py3.7.egg\n",
+            "Searching for tensorflow-estimator<2.12,>=2.11.0rc0\n",
+            "Reading https://pypi.org/simple/tensorflow-estimator/\n",
+            "Downloading https://files.pythonhosted.org/packages/4e/87/b6dcbff18975a4a20ada7edd7fd5795c530f8e26dc9b819ec02792156191/tensorflow_estimator-2.11.0rc0-py2.py3-none-any.whl#sha256=085f14c461031d5e26c1b3154ebbf8aa7a5555e2ed6a3d60d3196a6d711a6c84\n",
+            "Best match: tensorflow-estimator 2.11.0rc0\n",
+            "Processing tensorflow_estimator-2.11.0rc0-py2.py3-none-any.whl\n",
+            "Installing tensorflow_estimator-2.11.0rc0-py2.py3-none-any.whl to /usr/local/lib/python3.7/dist-packages\n",
+            "Adding tensorflow-estimator 2.11.0rc0 to easy-install.pth file\n",
+            "\n",
+            "Installed /usr/local/lib/python3.7/dist-packages/tensorflow_estimator-2.11.0rc0-py3.7.egg\n",
+            "Searching for tensorboard<2.11,>=2.10\n",
+            "Reading https://pypi.org/simple/tensorboard/\n",
+            "Downloading https://files.pythonhosted.org/packages/80/49/a5ec29886ef823718c8ae54ed0b3ad7e19066b5bf21cec5038427e6a04c4/tensorboard-2.10.1-py3-none-any.whl#sha256=fb9222c1750e2fa35ef170d998a1e229f626eeced3004494a8849c88c15d8c1c\n",
+            "Best match: tensorboard 2.10.1\n",
+            "Processing tensorboard-2.10.1-py3-none-any.whl\n",
+            "Installing tensorboard-2.10.1-py3-none-any.whl to /usr/local/lib/python3.7/dist-packages\n",
+            "Adding tensorboard 2.10.1 to easy-install.pth file\n",
+            "Installing tensorboard script to /usr/local/bin\n",
+            "\n",
+            "Installed /usr/local/lib/python3.7/dist-packages/tensorboard-2.10.1-py3.7.egg\n",
+            "Searching for keras<2.12,>=2.11.0rc1\n",
+            "Reading https://pypi.org/simple/keras/\n",
+            "Downloading https://files.pythonhosted.org/packages/6b/b6/ac365c07849417038b234301c1f3c25b5a16858c5a9cac6b9160ecb4907f/keras-2.11.0rc3-py2.py3-none-any.whl#sha256=3d9737556ea3b869473e05fe733f884a9638e3d24148c2601b420bbcc26b636a\n",
+            "Best match: keras 2.11.0rc3\n",
+            "Processing keras-2.11.0rc3-py2.py3-none-any.whl\n",
+            "Installing keras-2.11.0rc3-py2.py3-none-any.whl to /usr/local/lib/python3.7/dist-packages\n",
+            "Adding keras 2.11.0rc3 to easy-install.pth file\n",
+            "\n",
+            "Installed /usr/local/lib/python3.7/dist-packages/keras-2.11.0rc3-py3.7.egg\n",
+            "error: gast 0.5.3 is installed but gast<=0.4.0,>=0.2.1 is required by {'tensorflow'}\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install jupyter"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "BMUSn7IfQtNC",
+        "outputId": "bb4f90d3-5d96-45bd-9133-48ef715109fc"
+      },
+      "execution_count": 199,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+            "Requirement already satisfied: jupyter in /usr/local/lib/python3.7/dist-packages (1.0.0)\n",
+            "Requirement already satisfied: jupyter-console in /usr/local/lib/python3.7/dist-packages (from jupyter) (6.1.0)\n",
+            "Requirement already satisfied: qtconsole in /usr/local/lib/python3.7/dist-packages (from jupyter) (5.4.0)\n",
+            "Requirement already satisfied: ipywidgets in /usr/local/lib/python3.7/dist-packages (from jupyter) (7.7.1)\n",
+            "Requirement already satisfied: nbconvert in /usr/local/lib/python3.7/dist-packages (from jupyter) (5.6.1)\n",
+            "Requirement already satisfied: notebook in /usr/local/lib/python3.7/dist-packages (from jupyter) (5.7.16)\n",
+            "Requirement already satisfied: ipykernel in /usr/local/lib/python3.7/dist-packages (from jupyter) (5.3.4)\n",
+            "Requirement already satisfied: traitlets>=4.1.0 in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter) (5.1.1)\n",
+            "Requirement already satisfied: jupyter-client in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter) (6.1.12)\n",
+            "Requirement already satisfied: tornado>=4.2 in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter) (6.0.4)\n",
+            "Requirement already satisfied: ipython>=5.0.0 in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter) (7.9.0)\n",
+            "Requirement already satisfied: decorator in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (4.4.2)\n",
+            "Requirement already satisfied: backcall in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (0.2.0)\n",
+            "Requirement already satisfied: pexpect in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (4.8.0)\n",
+            "Requirement already satisfied: pygments in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (2.6.1)\n",
+            "Requirement already satisfied: jedi>=0.10 in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (0.18.1)\n",
+            "Requirement already satisfied: pickleshare in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (0.7.5)\n",
+            "Requirement already satisfied: prompt-toolkit<2.1.0,>=2.0.0 in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (2.0.10)\n",
+            "Requirement already satisfied: setuptools>=18.5 in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (57.4.0)\n",
+            "Requirement already satisfied: parso<0.9.0,>=0.8.0 in /usr/local/lib/python3.7/dist-packages (from jedi>=0.10->ipython>=5.0.0->ipykernel->jupyter) (0.8.3)\n",
+            "Requirement already satisfied: wcwidth in /usr/local/lib/python3.7/dist-packages (from prompt-toolkit<2.1.0,>=2.0.0->ipython>=5.0.0->ipykernel->jupyter) (0.2.5)\n",
+            "Requirement already satisfied: six>=1.9.0 in /usr/local/lib/python3.7/dist-packages (from prompt-toolkit<2.1.0,>=2.0.0->ipython>=5.0.0->ipykernel->jupyter) (1.15.0)\n",
+            "Requirement already satisfied: jupyterlab-widgets>=1.0.0 in /usr/local/lib/python3.7/dist-packages (from ipywidgets->jupyter) (3.0.3)\n",
+            "Requirement already satisfied: ipython-genutils~=0.2.0 in /usr/local/lib/python3.7/dist-packages (from ipywidgets->jupyter) (0.2.0)\n",
+            "Requirement already satisfied: widgetsnbextension~=3.6.0 in /usr/local/lib/python3.7/dist-packages (from ipywidgets->jupyter) (3.6.1)\n",
+            "Requirement already satisfied: jupyter-core>=4.4.0 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (4.11.2)\n",
+            "Requirement already satisfied: jinja2<=3.0.0 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (2.11.3)\n",
+            "Requirement already satisfied: terminado>=0.8.1 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (0.13.3)\n",
+            "Requirement already satisfied: prometheus-client in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (0.15.0)\n",
+            "Requirement already satisfied: pyzmq>=17 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (23.2.1)\n",
+            "Requirement already satisfied: nbformat in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (5.7.0)\n",
+            "Requirement already satisfied: Send2Trash in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (1.8.0)\n",
+            "Requirement already satisfied: MarkupSafe>=0.23 in /usr/local/lib/python3.7/dist-packages (from jinja2<=3.0.0->notebook->jupyter) (2.0.1)\n",
+            "Requirement already satisfied: python-dateutil>=2.1 in /usr/local/lib/python3.7/dist-packages (from jupyter-client->ipykernel->jupyter) (2.8.2)\n",
+            "Requirement already satisfied: defusedxml in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (0.7.1)\n",
+            "Requirement already satisfied: mistune<2,>=0.8.1 in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (0.8.4)\n",
+            "Requirement already satisfied: pandocfilters>=1.4.1 in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (1.5.0)\n",
+            "Requirement already satisfied: entrypoints>=0.2.2 in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (0.4)\n",
+            "Requirement already satisfied: bleach in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (5.0.1)\n",
+            "Requirement already satisfied: testpath in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (0.6.0)\n",
+            "Requirement already satisfied: jsonschema>=2.6 in /usr/local/lib/python3.7/dist-packages (from nbformat->notebook->jupyter) (4.3.3)\n",
+            "Requirement already satisfied: fastjsonschema in /usr/local/lib/python3.7/dist-packages (from nbformat->notebook->jupyter) (2.16.2)\n",
+            "Requirement already satisfied: importlib-metadata>=3.6 in /usr/local/lib/python3.7/dist-packages (from nbformat->notebook->jupyter) (4.13.0)\n",
+            "Requirement already satisfied: zipp>=0.5 in /usr/local/lib/python3.7/dist-packages (from importlib-metadata>=3.6->nbformat->notebook->jupyter) (3.10.0)\n",
+            "Requirement already satisfied: typing-extensions>=3.6.4 in /usr/local/lib/python3.7/dist-packages (from importlib-metadata>=3.6->nbformat->notebook->jupyter) (4.1.1)\n",
+            "Requirement already satisfied: attrs>=17.4.0 in /usr/local/lib/python3.7/dist-packages (from jsonschema>=2.6->nbformat->notebook->jupyter) (22.1.0)\n",
+            "Requirement already satisfied: importlib-resources>=1.4.0 in /usr/local/lib/python3.7/dist-packages (from jsonschema>=2.6->nbformat->notebook->jupyter) (5.10.0)\n",
+            "Requirement already satisfied: pyrsistent!=0.17.0,!=0.17.1,!=0.17.2,>=0.14.0 in /usr/local/lib/python3.7/dist-packages (from jsonschema>=2.6->nbformat->notebook->jupyter) (0.19.2)\n",
+            "Requirement already satisfied: ptyprocess in /usr/local/lib/python3.7/dist-packages (from terminado>=0.8.1->notebook->jupyter) (0.7.0)\n",
+            "Requirement already satisfied: webencodings in /usr/local/lib/python3.7/dist-packages (from bleach->nbconvert->jupyter) (0.5.1)\n",
+            "Requirement already satisfied: qtpy>=2.0.1 in /usr/local/lib/python3.7/dist-packages (from qtconsole->jupyter) (2.3.0)\n",
+            "Requirement already satisfied: packaging in /usr/local/lib/python3.7/dist-packages (from qtpy>=2.0.1->qtconsole->jupyter) (21.3)\n",
+            "Requirement already satisfied: pyparsing!=3.0.5,>=2.0.2 in /usr/local/lib/python3.7/dist-packages (from packaging->qtpy>=2.0.1->qtconsole->jupyter) (3.0.9)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!jupyter notebook\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "pRoNys1_QVI2",
+        "outputId": "03442abf-ce83-460f-880a-1f0fc141d684"
+      },
+      "execution_count": 201,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "|WARNING|Notebook version 5 is no longer maintained. Please upgrade to version 6 or later.\n",
+            "Traceback (most recent call last):\n",
+            "  File \"/usr/local/bin/jupyter-notebook\", line 8, in <module>\n",
+            "    sys.exit(main())\n",
+            "  File \"/usr/local/lib/python3.7/dist-packages/jupyter_core/application.py\", line 269, in launch_instance\n",
+            "    return super().launch_instance(argv=argv, **kwargs)\n",
+            "  File \"/usr/local/lib/python3.7/dist-packages/traitlets/config/application.py\", line 845, in launch_instance\n",
+            "    app.initialize(argv)\n",
+            "  File \"/usr/local/lib/python3.7/dist-packages/traitlets/config/application.py\", line 88, in inner\n",
+            "    return method(app, *args, **kwargs)\n",
+            "  File \"/usr/local/lib/python3.7/dist-packages/notebook/notebookapp.py\", line 1631, in initialize\n",
+            "    self.init_webapp()\n",
+            "  File \"/usr/local/lib/python3.7/dist-packages/notebook/notebookapp.py\", line 1408, in init_webapp\n",
+            "    self.http_server.listen(port, self.ip)\n",
+            "  File \"/usr/local/lib/python3.7/dist-packages/tornado/tcpserver.py\", line 151, in listen\n",
+            "    sockets = bind_sockets(port, address=address)\n",
+            "  File \"/usr/local/lib/python3.7/dist-packages/tornado/netutil.py\", line 174, in bind_sockets\n",
+            "    sock.bind(sockaddr)\n",
+            "OSError: [Errno 99] Cannot assign requested address\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "69jUFy4EQ2p9",
+        "outputId": "a73f8968-937c-4128-a4dd-5bb277a26568"
+      },
+      "execution_count": 200,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "install: missing destination file operand after 'jupyter'\n",
+            "Try 'install --help' for more information.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install --help"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "nx94PxfYRERD",
+        "outputId": "c1821c4c-7bd0-4fc0-952e-22c184048c8c"
+      },
+      "execution_count": 202,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\n",
+            "Usage:   \n",
+            "  pip3 install [options] <requirement specifier> [package-index-options] ...\n",
+            "  pip3 install [options] -r <requirements file> [package-index-options] ...\n",
+            "  pip3 install [options] [-e] <vcs project url> ...\n",
+            "  pip3 install [options] [-e] <local project path> ...\n",
+            "  pip3 install [options] <archive url/path> ...\n",
+            "\n",
+            "Description:\n",
+            "  Install packages from:\n",
+            "  \n",
+            "  - PyPI (and other indexes) using requirement specifiers.\n",
+            "  - VCS project urls.\n",
+            "  - Local project directories.\n",
+            "  - Local or remote source archives.\n",
+            "  \n",
+            "  pip also supports installing from \"requirements files\", which provide\n",
+            "  an easy way to specify a whole environment to be installed.\n",
+            "\n",
+            "Install Options:\n",
+            "  -r, --requirement <file>\n",
+            "  Install\n",
+            "  from the\n",
+            "  given requi\n",
+            "  rements\n",
+            "  file. This\n",
+            "  option can\n",
+            "  be used\n",
+            "  multiple\n",
+            "  times.\n",
+            "  -c, --constraint <file>\n",
+            "  Constrain\n",
+            "  versions\n",
+            "  using the\n",
+            "  given\n",
+            "  constraints\n",
+            "  file. This\n",
+            "  option can\n",
+            "  be used\n",
+            "  multiple\n",
+            "  times.\n",
+            "  --no-deps\n",
+            "  Don't\n",
+            "  install\n",
+            "  package dep\n",
+            "  endencies.\n",
+            "  --pre\n",
+            "  Include\n",
+            "  pre-release\n",
+            "  and\n",
+            "  development\n",
+            "  versions.\n",
+            "  By default,\n",
+            "  pip only\n",
+            "  finds\n",
+            "  stable\n",
+            "  versions.\n",
+            "  -e, --editable <path/url>\n",
+            "  Install a\n",
+            "  project in\n",
+            "  editable\n",
+            "  mode (i.e.\n",
+            "  setuptools\n",
+            "  \"develop\n",
+            "  mode\") from\n",
+            "  a local\n",
+            "  project\n",
+            "  path or a\n",
+            "  VCS url.\n",
+            "  -t, --target <dir>\n",
+            "  Install\n",
+            "  packages\n",
+            "  into <dir>.\n",
+            "  By default\n",
+            "  this will\n",
+            "  not replace\n",
+            "  existing fi\n",
+            "  les/folders\n",
+            "  in <dir>.\n",
+            "  Use\n",
+            "  --upgrade\n",
+            "  to replace\n",
+            "  existing\n",
+            "  packages in\n",
+            "  <dir> with\n",
+            "  new\n",
+            "  versions.\n",
+            "  --platform <platform>\n",
+            "  Only use\n",
+            "  wheels\n",
+            "  compatible\n",
+            "  with\n",
+            "  <platform>.\n",
+            "  Defaults to\n",
+            "  the\n",
+            "  platform of\n",
+            "  the running\n",
+            "  system. Use\n",
+            "  this option\n",
+            "  multiple\n",
+            "  times to\n",
+            "  specify\n",
+            "  multiple\n",
+            "  platforms\n",
+            "  supported\n",
+            "  by the\n",
+            "  target inte\n",
+            "  rpreter.\n",
+            "  --python-version <python_version>\n",
+            "  The Python\n",
+            "  interpreter\n",
+            "  version to\n",
+            "  use for\n",
+            "  wheel and\n",
+            "  \"Requires-\n",
+            "  Python\" com\n",
+            "  patibility\n",
+            "  checks.\n",
+            "  Defaults to\n",
+            "  a version\n",
+            "  derived\n",
+            "  from the\n",
+            "  running int\n",
+            "  erpreter.\n",
+            "  The version\n",
+            "  can be\n",
+            "  specified\n",
+            "  using up to\n",
+            "  three dot-\n",
+            "  separated\n",
+            "  integers\n",
+            "  (e.g. \"3\"\n",
+            "  for 3.0.0,\n",
+            "  \"3.7\" for\n",
+            "  3.7.0, or\n",
+            "  \"3.7.3\"). A\n",
+            "  major-minor\n",
+            "  version can\n",
+            "  also be\n",
+            "  given as a\n",
+            "  string\n",
+            "  without\n",
+            "  dots (e.g.\n",
+            "  \"37\" for\n",
+            "  3.7.0).\n",
+            "  --implementation <implementation>\n",
+            "  Only use\n",
+            "  wheels\n",
+            "  compatible\n",
+            "  with Python\n",
+            "  implementat\n",
+            "  ion <implem\n",
+            "  entation>,\n",
+            "  e.g. 'pp',\n",
+            "  'jy', 'cp',\n",
+            "  or 'ip'. If\n",
+            "  not\n",
+            "  specified,\n",
+            "  then the\n",
+            "  current\n",
+            "  interpreter\n",
+            "  implementat\n",
+            "  ion is\n",
+            "  used.  Use\n",
+            "  'py' to\n",
+            "  force imple\n",
+            "  mentation-\n",
+            "  agnostic\n",
+            "  wheels.\n",
+            "  --abi <abi>\n",
+            "  Only use\n",
+            "  wheels\n",
+            "  compatible\n",
+            "  with Python\n",
+            "  abi <abi>,\n",
+            "  e.g.\n",
+            "  'pypy_41'.\n",
+            "  If not\n",
+            "  specified,\n",
+            "  then the\n",
+            "  current\n",
+            "  interpreter\n",
+            "  abi tag is\n",
+            "  used. Use\n",
+            "  this option\n",
+            "  multiple\n",
+            "  times to\n",
+            "  specify\n",
+            "  multiple\n",
+            "  abis\n",
+            "  supported\n",
+            "  by the\n",
+            "  target inte\n",
+            "  rpreter.\n",
+            "  Generally\n",
+            "  you will\n",
+            "  need to\n",
+            "  specify --i\n",
+            "  mplementati\n",
+            "  on,\n",
+            "  --platform,\n",
+            "  and\n",
+            "  --python-\n",
+            "  version\n",
+            "  when using\n",
+            "  this\n",
+            "  option.\n",
+            "  --user\n",
+            "  Install to\n",
+            "  the Python\n",
+            "  user\n",
+            "  install\n",
+            "  directory\n",
+            "  for your\n",
+            "  platform.\n",
+            "  Typically\n",
+            "  ~/.local/,\n",
+            "  or %APPDATA\n",
+            "  %\\Python on\n",
+            "  Windows.\n",
+            "  (See the\n",
+            "  Python docu\n",
+            "  mentation\n",
+            "  for site.US\n",
+            "  ER_BASE for\n",
+            "  full\n",
+            "  details.)\n",
+            "  --root <dir>\n",
+            "  Install\n",
+            "  everything\n",
+            "  relative to\n",
+            "  this\n",
+            "  alternate\n",
+            "  root\n",
+            "  directory.\n",
+            "  --prefix <dir>\n",
+            "  Installatio\n",
+            "  n prefix\n",
+            "  where lib,\n",
+            "  bin and\n",
+            "  other top-\n",
+            "  level\n",
+            "  folders are\n",
+            "  placed\n",
+            "  --src <dir>\n",
+            "  Directory\n",
+            "  to check\n",
+            "  out\n",
+            "  editable\n",
+            "  projects\n",
+            "  into. The\n",
+            "  default in\n",
+            "  a\n",
+            "  virtualenv\n",
+            "  is \"<venv\n",
+            "  path>/src\".\n",
+            "  The default\n",
+            "  for global\n",
+            "  installs is\n",
+            "  \"<current\n",
+            "  dir>/src\".\n",
+            "  -U, --upgrade\n",
+            "  Upgrade all\n",
+            "  specified\n",
+            "  packages to\n",
+            "  the newest\n",
+            "  available\n",
+            "  version.\n",
+            "  The\n",
+            "  handling of\n",
+            "  dependencie\n",
+            "  s depends\n",
+            "  on the\n",
+            "  upgrade-\n",
+            "  strategy\n",
+            "  used.\n",
+            "  --upgrade-strategy <upgrade_strategy>\n",
+            "  Determines\n",
+            "  how\n",
+            "  dependency\n",
+            "  upgrading\n",
+            "  should be\n",
+            "  handled\n",
+            "  [default:\n",
+            "  only-if-\n",
+            "  needed].\n",
+            "  \"eager\" - d\n",
+            "  ependencies\n",
+            "  are\n",
+            "  upgraded\n",
+            "  regardless\n",
+            "  of whether\n",
+            "  the\n",
+            "  currently\n",
+            "  installed\n",
+            "  version\n",
+            "  satisfies\n",
+            "  the require\n",
+            "  ments of\n",
+            "  the\n",
+            "  upgraded\n",
+            "  package(s).\n",
+            "  \"only-if-\n",
+            "  needed\" -\n",
+            "  are\n",
+            "  upgraded\n",
+            "  only when\n",
+            "  they do not\n",
+            "  satisfy the\n",
+            "  requirement\n",
+            "  s of the\n",
+            "  upgraded\n",
+            "  package(s).\n",
+            "  --force-reinstall\n",
+            "  Reinstall\n",
+            "  all\n",
+            "  packages\n",
+            "  even if\n",
+            "  they are\n",
+            "  already up-\n",
+            "  to-date.\n",
+            "  -I, --ignore-installed\n",
+            "  Ignore the\n",
+            "  installed\n",
+            "  packages,\n",
+            "  overwriting\n",
+            "  them. This\n",
+            "  can break\n",
+            "  your system\n",
+            "  if the\n",
+            "  existing\n",
+            "  package is\n",
+            "  of a\n",
+            "  different\n",
+            "  version or\n",
+            "  was\n",
+            "  installed\n",
+            "  with a\n",
+            "  different\n",
+            "  package\n",
+            "  manager!\n",
+            "  --ignore-requires-python\n",
+            "  Ignore the\n",
+            "  Requires-\n",
+            "  Python info\n",
+            "  rmation.\n",
+            "  --no-build-isolation\n",
+            "  Disable\n",
+            "  isolation\n",
+            "  when\n",
+            "  building a\n",
+            "  modern\n",
+            "  source dist\n",
+            "  ribution.\n",
+            "  Build depen\n",
+            "  dencies\n",
+            "  specified\n",
+            "  by PEP 518\n",
+            "  must be\n",
+            "  already\n",
+            "  installed\n",
+            "  if this\n",
+            "  option is\n",
+            "  used.\n",
+            "  --use-pep517\n",
+            "  Use PEP 517\n",
+            "  for\n",
+            "  building\n",
+            "  source dist\n",
+            "  ributions\n",
+            "  (use --no-\n",
+            "  use-pep517\n",
+            "  to force\n",
+            "  legacy\n",
+            "  behaviour).\n",
+            "  --install-option <options>\n",
+            "  Extra\n",
+            "  arguments\n",
+            "  to be\n",
+            "  supplied to\n",
+            "  the\n",
+            "  setup.py\n",
+            "  install\n",
+            "  command\n",
+            "  (use like\n",
+            "  --install-\n",
+            "  option=\"--\n",
+            "  install-scr\n",
+            "  ipts=/usr/l\n",
+            "  ocal/bin\").\n",
+            "  Use\n",
+            "  multiple\n",
+            "  --install-\n",
+            "  option\n",
+            "  options to\n",
+            "  pass\n",
+            "  multiple\n",
+            "  options to\n",
+            "  setup.py\n",
+            "  install. If\n",
+            "  you are\n",
+            "  using an\n",
+            "  option with\n",
+            "  a directory\n",
+            "  path, be\n",
+            "  sure to use\n",
+            "  absolute\n",
+            "  path.\n",
+            "  --global-option <options>\n",
+            "  Extra\n",
+            "  global\n",
+            "  options to\n",
+            "  be supplied\n",
+            "  to the\n",
+            "  setup.py\n",
+            "  call before\n",
+            "  the install\n",
+            "  or\n",
+            "  bdist_wheel\n",
+            "  command.\n",
+            "  --compile\n",
+            "  Compile\n",
+            "  Python\n",
+            "  source\n",
+            "  files to\n",
+            "  bytecode\n",
+            "  --no-compile\n",
+            "  Do not\n",
+            "  compile\n",
+            "  Python\n",
+            "  source\n",
+            "  files to\n",
+            "  bytecode\n",
+            "  --no-warn-script-location\n",
+            "  Do not warn\n",
+            "  when\n",
+            "  installing\n",
+            "  scripts\n",
+            "  outside\n",
+            "  PATH\n",
+            "  --no-warn-conflicts\n",
+            "  Do not warn\n",
+            "  about\n",
+            "  broken depe\n",
+            "  ndencies\n",
+            "  --no-binary <format_control>\n",
+            "  Do not use\n",
+            "  binary\n",
+            "  packages.\n",
+            "  Can be\n",
+            "  supplied\n",
+            "  multiple\n",
+            "  times, and\n",
+            "  each time\n",
+            "  adds to the\n",
+            "  existing\n",
+            "  value.\n",
+            "  Accepts\n",
+            "  either\n",
+            "  \":all:\" to\n",
+            "  disable all\n",
+            "  binary\n",
+            "  packages,\n",
+            "  \":none:\" to\n",
+            "  empty the\n",
+            "  set (notice\n",
+            "  the\n",
+            "  colons), or\n",
+            "  one or more\n",
+            "  package\n",
+            "  names with\n",
+            "  commas\n",
+            "  between\n",
+            "  them (no\n",
+            "  colons).\n",
+            "  Note that\n",
+            "  some\n",
+            "  packages\n",
+            "  are tricky\n",
+            "  to compile\n",
+            "  and may\n",
+            "  fail to\n",
+            "  install\n",
+            "  when this\n",
+            "  option is\n",
+            "  used on\n",
+            "  them.\n",
+            "  --only-binary <format_control>\n",
+            "  Do not use\n",
+            "  source\n",
+            "  packages.\n",
+            "  Can be\n",
+            "  supplied\n",
+            "  multiple\n",
+            "  times, and\n",
+            "  each time\n",
+            "  adds to the\n",
+            "  existing\n",
+            "  value.\n",
+            "  Accepts\n",
+            "  either\n",
+            "  \":all:\" to\n",
+            "  disable all\n",
+            "  source\n",
+            "  packages,\n",
+            "  \":none:\" to\n",
+            "  empty the\n",
+            "  set, or one\n",
+            "  or more\n",
+            "  package\n",
+            "  names with\n",
+            "  commas\n",
+            "  between\n",
+            "  them.\n",
+            "  Packages\n",
+            "  without\n",
+            "  binary dist\n",
+            "  ributions\n",
+            "  will fail\n",
+            "  to install\n",
+            "  when this\n",
+            "  option is\n",
+            "  used on\n",
+            "  them.\n",
+            "  --prefer-binary\n",
+            "  Prefer\n",
+            "  older\n",
+            "  binary\n",
+            "  packages\n",
+            "  over newer\n",
+            "  source\n",
+            "  packages.\n",
+            "  --require-hashes\n",
+            "  Require a\n",
+            "  hash to\n",
+            "  check each\n",
+            "  requirement\n",
+            "  against,\n",
+            "  for\n",
+            "  repeatable\n",
+            "  installs.\n",
+            "  This option\n",
+            "  is implied\n",
+            "  when any\n",
+            "  package in\n",
+            "  a requireme\n",
+            "  nts file\n",
+            "  has a\n",
+            "  --hash\n",
+            "  option.\n",
+            "  --progress-bar <progress_bar>\n",
+            "  Specify\n",
+            "  type of\n",
+            "  progress to\n",
+            "  be\n",
+            "  displayed [\n",
+            "  off|on|asci\n",
+            "  i|pretty|em\n",
+            "  oji]\n",
+            "  (default:\n",
+            "  on)\n",
+            "  --no-clean\n",
+            "  Don't clean\n",
+            "  up build di\n",
+            "  rectories.\n",
+            "\n",
+            "Package Index Options:\n",
+            "  -i, --index-url <url>\n",
+            "  Base URL of\n",
+            "  the Python\n",
+            "  Package\n",
+            "  Index\n",
+            "  (default ht\n",
+            "  tps://pypi.\n",
+            "  org/simple)\n",
+            "  . This\n",
+            "  should\n",
+            "  point to a\n",
+            "  repository\n",
+            "  compliant\n",
+            "  with PEP\n",
+            "  503 (the\n",
+            "  simple\n",
+            "  repository\n",
+            "  API) or a\n",
+            "  local\n",
+            "  directory\n",
+            "  laid out in\n",
+            "  the same\n",
+            "  format.\n",
+            "  --extra-index-url <url>\n",
+            "  Extra URLs\n",
+            "  of package\n",
+            "  indexes to\n",
+            "  use in\n",
+            "  addition to\n",
+            "  --index-\n",
+            "  url. Should\n",
+            "  follow the\n",
+            "  same rules\n",
+            "  as --index-\n",
+            "  url.\n",
+            "  --no-index\n",
+            "  Ignore\n",
+            "  package\n",
+            "  index (only\n",
+            "  looking at\n",
+            "  --find-\n",
+            "  links URLs\n",
+            "  instead).\n",
+            "  -f, --find-links <url>\n",
+            "  If a URL or\n",
+            "  path to an\n",
+            "  html file,\n",
+            "  then parse\n",
+            "  for links\n",
+            "  to archives\n",
+            "  such as\n",
+            "  sdist\n",
+            "  (.tar.gz)\n",
+            "  or wheel\n",
+            "  (.whl)\n",
+            "  files. If a\n",
+            "  local path\n",
+            "  or file://\n",
+            "  URL that's\n",
+            "  a\n",
+            "  directory,\n",
+            "  then look\n",
+            "  for\n",
+            "  archives in\n",
+            "  the\n",
+            "  directory\n",
+            "  listing.\n",
+            "  Links to\n",
+            "  VCS project\n",
+            "  URLs are\n",
+            "  not\n",
+            "  supported.\n",
+            "\n",
+            "General Options:\n",
+            "  -h, --help\n",
+            "  Show help.\n",
+            "  --isolated\n",
+            "  Run pip in\n",
+            "  an isolated\n",
+            "  mode,\n",
+            "  ignoring\n",
+            "  environment\n",
+            "  variables\n",
+            "  and user co\n",
+            "  nfiguration\n",
+            "  .\n",
+            "  -v, --verbose\n",
+            "  Give more\n",
+            "  output.\n",
+            "  Option is\n",
+            "  additive,\n",
+            "  and can be\n",
+            "  used up to\n",
+            "  3 times.\n",
+            "  -V, --version\n",
+            "  Show\n",
+            "  version and\n",
+            "  exit.\n",
+            "  -q, --quiet\n",
+            "  Give less\n",
+            "  output.\n",
+            "  Option is\n",
+            "  additive,\n",
+            "  and can be\n",
+            "  used up to\n",
+            "  3 times (co\n",
+            "  rresponding\n",
+            "  to WARNING,\n",
+            "  ERROR, and\n",
+            "  CRITICAL\n",
+            "  logging\n",
+            "  levels).\n",
+            "  --log <path>\n",
+            "  Path to a\n",
+            "  verbose\n",
+            "  appending\n",
+            "  log.\n",
+            "  --no-input\n",
+            "  Disable\n",
+            "  prompting\n",
+            "  for input.\n",
+            "  --proxy <proxy>\n",
+            "  Specify a\n",
+            "  proxy in\n",
+            "  the form [u\n",
+            "  ser:passwd@\n",
+            "  ]proxy.serv\n",
+            "  er:port.\n",
+            "  --retries <retries>\n",
+            "  Maximum\n",
+            "  number of\n",
+            "  retries\n",
+            "  each\n",
+            "  connection\n",
+            "  should\n",
+            "  attempt\n",
+            "  (default 5\n",
+            "  times).\n",
+            "  --timeout <sec>\n",
+            "  Set the\n",
+            "  socket\n",
+            "  timeout\n",
+            "  (default 15\n",
+            "  seconds).\n",
+            "  --exists-action <action>\n",
+            "  Default\n",
+            "  action when\n",
+            "  a path\n",
+            "  already\n",
+            "  exists:\n",
+            "  (s)witch,\n",
+            "  (i)gnore,\n",
+            "  (w)ipe,\n",
+            "  (b)ackup,\n",
+            "  (a)bort.\n",
+            "  --trusted-host <hostname>\n",
+            "  Mark this\n",
+            "  host or\n",
+            "  host:port\n",
+            "  pair as\n",
+            "  trusted,\n",
+            "  even though\n",
+            "  it does not\n",
+            "  have valid\n",
+            "  or any\n",
+            "  HTTPS.\n",
+            "  --cert <path>\n",
+            "  Path to\n",
+            "  PEM-encoded\n",
+            "  CA\n",
+            "  certificate\n",
+            "  bundle. If\n",
+            "  provided,\n",
+            "  overrides\n",
+            "  the\n",
+            "  default.\n",
+            "  See 'SSL\n",
+            "  Certificate\n",
+            "  Verificatio\n",
+            "  n' in pip d\n",
+            "  ocumentatio\n",
+            "  n for more \n",
+            "  information\n",
+            "  .\n",
+            "  --client-cert <path>\n",
+            "  Path to SSL\n",
+            "  client cert\n",
+            "  ificate, a\n",
+            "  single file\n",
+            "  containing\n",
+            "  the private\n",
+            "  key and the\n",
+            "  certificate\n",
+            "  in PEM\n",
+            "  format.\n",
+            "  --cache-dir <dir>\n",
+            "  Store the\n",
+            "  cache data\n",
+            "  in <dir>.\n",
+            "  --no-cache-dir\n",
+            "  Disable the\n",
+            "  cache.\n",
+            "  --disable-pip-version-check\n",
+            "  Don't perio\n",
+            "  dically\n",
+            "  check PyPI\n",
+            "  to\n",
+            "  determine\n",
+            "  whether a\n",
+            "  new version\n",
+            "  of pip is\n",
+            "  available\n",
+            "  for\n",
+            "  download.\n",
+            "  Implied\n",
+            "  with --no-\n",
+            "  index.\n",
+            "  --no-color\n",
+            "  Suppress\n",
+            "  colored\n",
+            "  output.\n",
+            "  --no-python-version-warning\n",
+            "  Silence\n",
+            "  deprecation\n",
+            "  warnings\n",
+            "  for\n",
+            "  upcoming\n",
+            "  unsupported\n",
+            "  Pythons.\n",
+            "  --use-feature <feature>\n",
+            "  Enable new \n",
+            "  functionali\n",
+            "  ty, that\n",
+            "  may be\n",
+            "  backward in\n",
+            "  compatible.\n",
+            "  --use-deprecated <feature>\n",
+            "  Enable\n",
+            "  deprecated \n",
+            "  functionali\n",
+            "  ty, that\n",
+            "  will be\n",
+            "  removed in\n",
+            "  the future.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip3 install jupyter"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "DxudMmKiRWUo",
+        "outputId": "282fc854-0830-4651-b566-f8a2b48687ee"
+      },
+      "execution_count": 204,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+            "Requirement already satisfied: jupyter in /usr/local/lib/python3.7/dist-packages (1.0.0)\n",
+            "Requirement already satisfied: qtconsole in /usr/local/lib/python3.7/dist-packages (from jupyter) (5.4.0)\n",
+            "Requirement already satisfied: nbconvert in /usr/local/lib/python3.7/dist-packages (from jupyter) (5.6.1)\n",
+            "Requirement already satisfied: ipywidgets in /usr/local/lib/python3.7/dist-packages (from jupyter) (7.7.1)\n",
+            "Requirement already satisfied: ipykernel in /usr/local/lib/python3.7/dist-packages (from jupyter) (5.3.4)\n",
+            "Requirement already satisfied: notebook in /usr/local/lib/python3.7/dist-packages (from jupyter) (5.7.16)\n",
+            "Requirement already satisfied: jupyter-console in /usr/local/lib/python3.7/dist-packages (from jupyter) (6.1.0)\n",
+            "Requirement already satisfied: tornado>=4.2 in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter) (6.0.4)\n",
+            "Requirement already satisfied: jupyter-client in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter) (6.1.12)\n",
+            "Requirement already satisfied: ipython>=5.0.0 in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter) (7.9.0)\n",
+            "Requirement already satisfied: traitlets>=4.1.0 in /usr/local/lib/python3.7/dist-packages (from ipykernel->jupyter) (5.1.1)\n",
+            "Requirement already satisfied: pickleshare in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (0.7.5)\n",
+            "Requirement already satisfied: backcall in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (0.2.0)\n",
+            "Requirement already satisfied: prompt-toolkit<2.1.0,>=2.0.0 in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (2.0.10)\n",
+            "Requirement already satisfied: decorator in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (4.4.2)\n",
+            "Requirement already satisfied: pexpect in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (4.8.0)\n",
+            "Requirement already satisfied: pygments in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (2.6.1)\n",
+            "Requirement already satisfied: setuptools>=18.5 in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (57.4.0)\n",
+            "Requirement already satisfied: jedi>=0.10 in /usr/local/lib/python3.7/dist-packages (from ipython>=5.0.0->ipykernel->jupyter) (0.18.1)\n",
+            "Requirement already satisfied: parso<0.9.0,>=0.8.0 in /usr/local/lib/python3.7/dist-packages (from jedi>=0.10->ipython>=5.0.0->ipykernel->jupyter) (0.8.3)\n",
+            "Requirement already satisfied: six>=1.9.0 in /usr/local/lib/python3.7/dist-packages (from prompt-toolkit<2.1.0,>=2.0.0->ipython>=5.0.0->ipykernel->jupyter) (1.15.0)\n",
+            "Requirement already satisfied: wcwidth in /usr/local/lib/python3.7/dist-packages (from prompt-toolkit<2.1.0,>=2.0.0->ipython>=5.0.0->ipykernel->jupyter) (0.2.5)\n",
+            "Requirement already satisfied: ipython-genutils~=0.2.0 in /usr/local/lib/python3.7/dist-packages (from ipywidgets->jupyter) (0.2.0)\n",
+            "Requirement already satisfied: jupyterlab-widgets>=1.0.0 in /usr/local/lib/python3.7/dist-packages (from ipywidgets->jupyter) (3.0.3)\n",
+            "Requirement already satisfied: widgetsnbextension~=3.6.0 in /usr/local/lib/python3.7/dist-packages (from ipywidgets->jupyter) (3.6.1)\n",
+            "Requirement already satisfied: nbformat in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (5.7.0)\n",
+            "Requirement already satisfied: prometheus-client in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (0.15.0)\n",
+            "Requirement already satisfied: pyzmq>=17 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (23.2.1)\n",
+            "Requirement already satisfied: jupyter-core>=4.4.0 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (4.11.2)\n",
+            "Requirement already satisfied: Send2Trash in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (1.8.0)\n",
+            "Requirement already satisfied: terminado>=0.8.1 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (0.13.3)\n",
+            "Requirement already satisfied: jinja2<=3.0.0 in /usr/local/lib/python3.7/dist-packages (from notebook->jupyter) (2.11.3)\n",
+            "Requirement already satisfied: MarkupSafe>=0.23 in /usr/local/lib/python3.7/dist-packages (from jinja2<=3.0.0->notebook->jupyter) (2.0.1)\n",
+            "Requirement already satisfied: python-dateutil>=2.1 in /usr/local/lib/python3.7/dist-packages (from jupyter-client->ipykernel->jupyter) (2.8.2)\n",
+            "Requirement already satisfied: testpath in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (0.6.0)\n",
+            "Requirement already satisfied: entrypoints>=0.2.2 in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (0.4)\n",
+            "Requirement already satisfied: bleach in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (5.0.1)\n",
+            "Requirement already satisfied: mistune<2,>=0.8.1 in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (0.8.4)\n",
+            "Requirement already satisfied: pandocfilters>=1.4.1 in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (1.5.0)\n",
+            "Requirement already satisfied: defusedxml in /usr/local/lib/python3.7/dist-packages (from nbconvert->jupyter) (0.7.1)\n",
+            "Requirement already satisfied: jsonschema>=2.6 in /usr/local/lib/python3.7/dist-packages (from nbformat->notebook->jupyter) (4.3.3)\n",
+            "Requirement already satisfied: importlib-metadata>=3.6 in /usr/local/lib/python3.7/dist-packages (from nbformat->notebook->jupyter) (4.13.0)\n",
+            "Requirement already satisfied: fastjsonschema in /usr/local/lib/python3.7/dist-packages (from nbformat->notebook->jupyter) (2.16.2)\n",
+            "Requirement already satisfied: zipp>=0.5 in /usr/local/lib/python3.7/dist-packages (from importlib-metadata>=3.6->nbformat->notebook->jupyter) (3.10.0)\n",
+            "Requirement already satisfied: typing-extensions>=3.6.4 in /usr/local/lib/python3.7/dist-packages (from importlib-metadata>=3.6->nbformat->notebook->jupyter) (4.1.1)\n",
+            "Requirement already satisfied: pyrsistent!=0.17.0,!=0.17.1,!=0.17.2,>=0.14.0 in /usr/local/lib/python3.7/dist-packages (from jsonschema>=2.6->nbformat->notebook->jupyter) (0.19.2)\n",
+            "Requirement already satisfied: attrs>=17.4.0 in /usr/local/lib/python3.7/dist-packages (from jsonschema>=2.6->nbformat->notebook->jupyter) (22.1.0)\n",
+            "Requirement already satisfied: importlib-resources>=1.4.0 in /usr/local/lib/python3.7/dist-packages (from jsonschema>=2.6->nbformat->notebook->jupyter) (5.10.0)\n",
+            "Requirement already satisfied: ptyprocess in /usr/local/lib/python3.7/dist-packages (from terminado>=0.8.1->notebook->jupyter) (0.7.0)\n",
+            "Requirement already satisfied: webencodings in /usr/local/lib/python3.7/dist-packages (from bleach->nbconvert->jupyter) (0.5.1)\n",
+            "Requirement already satisfied: qtpy>=2.0.1 in /usr/local/lib/python3.7/dist-packages (from qtconsole->jupyter) (2.3.0)\n",
+            "Requirement already satisfied: packaging in /usr/local/lib/python3.7/dist-packages (from qtpy>=2.0.1->qtconsole->jupyter) (21.3)\n",
+            "Requirement already satisfied: pyparsing!=3.0.5,>=2.0.2 in /usr/local/lib/python3.7/dist-packages (from packaging->qtpy>=2.0.1->qtconsole->jupyter) (3.0.9)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install -U --pre tensorflow==\"2.*\"\n",
+        "!pip install tf_slim"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "KERkGFI_S1Q4",
+        "outputId": "823e983e-d342-42e8-ec71-c4927f0faf6e"
+      },
+      "execution_count": 205,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+            "Collecting tensorflow==2.*\n",
+            "  Downloading tensorflow-2.11.0rc2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (588.3 MB)\n",
+            "\u001b[K     |████████████████████████████████| 588.3 MB 23 kB/s \n",
+            "\u001b[?25hRequirement already satisfied: opt-einsum>=2.3.2 in /usr/local/lib/python3.7/dist-packages (from tensorflow==2.*) (3.3.0)\n",
+            "Requirement already satisfied: astunparse>=1.6.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow==2.*) (1.6.3)\n",
+            "Requirement already satisfied: termcolor>=1.1.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow==2.*) (2.1.0)\n",
+            "Requirement already satisfied: tensorflow-io-gcs-filesystem>=0.23.1 in /usr/local/lib/python3.7/dist-packages (from tensorflow==2.*) (0.27.0)\n",
+            "Requirement already satisfied: numpy>=1.20 in /usr/local/lib/python3.7/dist-packages (from tensorflow==2.*) (1.21.6)\n",
+            "Requirement already satisfied: libclang>=13.0.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow==2.*) (14.0.6)\n",
+            "Requirement already satisfied: typing-extensions>=3.6.6 in /usr/local/lib/python3.7/dist-packages (from tensorflow==2.*) (4.1.1)\n",
+            "Requirement already satisfied: gast<=0.4.0,>=0.2.1 in /usr/local/lib/python3.7/dist-packages (from tensorflow==2.*) (0.2.2)\n",
+            "Requirement already satisfied: packaging in /usr/local/lib/python3.7/dist-packages (from tensorflow==2.*) (21.3)\n",
+            "Requirement already satisfied: absl-py>=1.0.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow==2.*) (1.3.0)\n",
+            "Collecting tensorflow-estimator<2.12,>=2.11.0rc0\n",
+            "  Downloading tensorflow_estimator-2.11.0rc0-py2.py3-none-any.whl (439 kB)\n",
+            "\u001b[K     |████████████████████████████████| 439 kB 45.1 MB/s \n",
+            "\u001b[?25hCollecting keras<2.12,>=2.11.0rc1\n",
+            "  Downloading keras-2.11.0rc3-py2.py3-none-any.whl (1.7 MB)\n",
+            "\u001b[K     |████████████████████████████████| 1.7 MB 43.0 MB/s \n",
+            "\u001b[?25hRequirement already satisfied: wrapt>=1.11.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow==2.*) (1.14.1)\n",
+            "Requirement already satisfied: h5py>=2.9.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow==2.*) (3.1.0)\n",
+            "Requirement already satisfied: six>=1.12.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow==2.*) (1.15.0)\n",
+            "Requirement already satisfied: grpcio<2.0,>=1.24.3 in /usr/local/lib/python3.7/dist-packages (from tensorflow==2.*) (1.50.0)\n",
+            "Requirement already satisfied: setuptools in /usr/local/lib/python3.7/dist-packages (from tensorflow==2.*) (57.4.0)\n",
+            "Collecting tensorboard<2.11,>=2.10\n",
+            "  Downloading tensorboard-2.10.1-py3-none-any.whl (5.9 MB)\n",
+            "\u001b[K     |████████████████████████████████| 5.9 MB 56.1 MB/s \n",
+            "\u001b[?25hRequirement already satisfied: protobuf<3.20,>=3.9.2 in /usr/local/lib/python3.7/dist-packages (from tensorflow==2.*) (3.17.3)\n",
+            "Collecting flatbuffers>=2.0\n",
+            "  Downloading flatbuffers-22.10.26-py2.py3-none-any.whl (26 kB)\n",
+            "Requirement already satisfied: google-pasta>=0.1.1 in /usr/local/lib/python3.7/dist-packages (from tensorflow==2.*) (0.2.0)\n",
+            "Requirement already satisfied: wheel<1.0,>=0.23.0 in /usr/local/lib/python3.7/dist-packages (from astunparse>=1.6.0->tensorflow==2.*) (0.38.1)\n",
+            "Requirement already satisfied: cached-property in /usr/local/lib/python3.7/dist-packages (from h5py>=2.9.0->tensorflow==2.*) (1.5.2)\n",
+            "Requirement already satisfied: google-auth-oauthlib<0.5,>=0.4.1 in /usr/local/lib/python3.7/dist-packages (from tensorboard<2.11,>=2.10->tensorflow==2.*) (0.4.6)\n",
+            "Requirement already satisfied: tensorboard-plugin-wit>=1.6.0 in /usr/local/lib/python3.7/dist-packages (from tensorboard<2.11,>=2.10->tensorflow==2.*) (1.8.1)\n",
+            "Requirement already satisfied: markdown>=2.6.8 in /usr/local/lib/python3.7/dist-packages (from tensorboard<2.11,>=2.10->tensorflow==2.*) (3.4.1)\n",
+            "Requirement already satisfied: tensorboard-data-server<0.7.0,>=0.6.0 in /usr/local/lib/python3.7/dist-packages (from tensorboard<2.11,>=2.10->tensorflow==2.*) (0.6.1)\n",
+            "Requirement already satisfied: google-auth<3,>=1.6.3 in /usr/local/lib/python3.7/dist-packages (from tensorboard<2.11,>=2.10->tensorflow==2.*) (1.35.0)\n",
+            "Requirement already satisfied: werkzeug>=1.0.1 in /usr/local/lib/python3.7/dist-packages (from tensorboard<2.11,>=2.10->tensorflow==2.*) (1.0.1)\n",
+            "Requirement already satisfied: requests<3,>=2.21.0 in /usr/local/lib/python3.7/dist-packages (from tensorboard<2.11,>=2.10->tensorflow==2.*) (2.23.0)\n",
+            "Requirement already satisfied: cachetools<5.0,>=2.0.0 in /usr/local/lib/python3.7/dist-packages (from google-auth<3,>=1.6.3->tensorboard<2.11,>=2.10->tensorflow==2.*) (4.2.4)\n",
+            "Requirement already satisfied: rsa<5,>=3.1.4 in /usr/local/lib/python3.7/dist-packages (from google-auth<3,>=1.6.3->tensorboard<2.11,>=2.10->tensorflow==2.*) (4.9)\n",
+            "Requirement already satisfied: pyasn1-modules>=0.2.1 in /usr/local/lib/python3.7/dist-packages (from google-auth<3,>=1.6.3->tensorboard<2.11,>=2.10->tensorflow==2.*) (0.2.8)\n",
+            "Requirement already satisfied: requests-oauthlib>=0.7.0 in /usr/local/lib/python3.7/dist-packages (from google-auth-oauthlib<0.5,>=0.4.1->tensorboard<2.11,>=2.10->tensorflow==2.*) (1.3.1)\n",
+            "Requirement already satisfied: importlib-metadata>=4.4 in /usr/local/lib/python3.7/dist-packages (from markdown>=2.6.8->tensorboard<2.11,>=2.10->tensorflow==2.*) (4.13.0)\n",
+            "Requirement already satisfied: zipp>=0.5 in /usr/local/lib/python3.7/dist-packages (from importlib-metadata>=4.4->markdown>=2.6.8->tensorboard<2.11,>=2.10->tensorflow==2.*) (3.10.0)\n",
+            "Requirement already satisfied: pyasn1<0.5.0,>=0.4.6 in /usr/local/lib/python3.7/dist-packages (from pyasn1-modules>=0.2.1->google-auth<3,>=1.6.3->tensorboard<2.11,>=2.10->tensorflow==2.*) (0.4.8)\n",
+            "Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.7/dist-packages (from requests<3,>=2.21.0->tensorboard<2.11,>=2.10->tensorflow==2.*) (2022.9.24)\n",
+            "Requirement already satisfied: chardet<4,>=3.0.2 in /usr/local/lib/python3.7/dist-packages (from requests<3,>=2.21.0->tensorboard<2.11,>=2.10->tensorflow==2.*) (3.0.4)\n",
+            "Requirement already satisfied: idna<3,>=2.5 in /usr/local/lib/python3.7/dist-packages (from requests<3,>=2.21.0->tensorboard<2.11,>=2.10->tensorflow==2.*) (2.10)\n",
+            "Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1 in /usr/local/lib/python3.7/dist-packages (from requests<3,>=2.21.0->tensorboard<2.11,>=2.10->tensorflow==2.*) (1.24.3)\n",
+            "Requirement already satisfied: oauthlib>=3.0.0 in /usr/local/lib/python3.7/dist-packages (from requests-oauthlib>=0.7.0->google-auth-oauthlib<0.5,>=0.4.1->tensorboard<2.11,>=2.10->tensorflow==2.*) (3.2.2)\n",
+            "Requirement already satisfied: pyparsing!=3.0.5,>=2.0.2 in /usr/local/lib/python3.7/dist-packages (from packaging->tensorflow==2.*) (3.0.9)\n",
+            "Installing collected packages: tensorflow-estimator, tensorboard, keras, flatbuffers, tensorflow\n",
+            "  Attempting uninstall: tensorflow-estimator\n",
+            "    Found existing installation: tensorflow-estimator 1.15.1\n",
+            "    Uninstalling tensorflow-estimator-1.15.1:\n",
+            "      Successfully uninstalled tensorflow-estimator-1.15.1\n",
+            "  Attempting uninstall: tensorboard\n",
+            "    Found existing installation: tensorboard 1.15.0\n",
+            "    Uninstalling tensorboard-1.15.0:\n",
+            "      Successfully uninstalled tensorboard-1.15.0\n",
+            "  Attempting uninstall: keras\n",
+            "    Found existing installation: keras 2.9.0\n",
+            "    Uninstalling keras-2.9.0:\n",
+            "      Successfully uninstalled keras-2.9.0\n",
+            "  Attempting uninstall: flatbuffers\n",
+            "    Found existing installation: flatbuffers 1.12\n",
+            "    Uninstalling flatbuffers-1.12:\n",
+            "      Successfully uninstalled flatbuffers-1.12\n",
+            "  Attempting uninstall: tensorflow\n",
+            "    Found existing installation: tensorflow 1.15.0\n",
+            "    Uninstalling tensorflow-1.15.0:\n",
+            "      Successfully uninstalled tensorflow-1.15.0\n",
+            "Successfully installed flatbuffers-22.10.26 keras-2.11.0rc3 tensorboard-2.10.1 tensorflow-2.11.0rc2 tensorflow-estimator-2.11.0rc0\n",
+            "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+            "Requirement already satisfied: tf_slim in /usr/local/lib/python3.7/dist-packages (1.1.0)\n",
+            "Requirement already satisfied: absl-py>=0.2.2 in /usr/local/lib/python3.7/dist-packages (from tf_slim) (1.3.0)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install pycocotools"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "DOUSLFooQPDa",
+        "outputId": "c11b2c1f-9048-45da-e09b-68d93d067391"
+      },
+      "execution_count": 206,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+            "Requirement already satisfied: pycocotools in /usr/local/lib/python3.7/dist-packages (2.0.6)\n",
+            "Requirement already satisfied: numpy in /usr/local/lib/python3.7/dist-packages (from pycocotools) (1.21.6)\n",
+            "Requirement already satisfied: matplotlib>=2.1.0 in /usr/local/lib/python3.7/dist-packages (from pycocotools) (3.2.2)\n",
+            "Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python3.7/dist-packages (from matplotlib>=2.1.0->pycocotools) (0.11.0)\n",
+            "Requirement already satisfied: python-dateutil>=2.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib>=2.1.0->pycocotools) (2.8.2)\n",
+            "Requirement already satisfied: kiwisolver>=1.0.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib>=2.1.0->pycocotools) (1.4.4)\n",
+            "Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,>=2.0.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib>=2.1.0->pycocotools) (3.0.9)\n",
+            "Requirement already satisfied: typing-extensions in /usr/local/lib/python3.7/dist-packages (from kiwisolver>=1.0.1->matplotlib>=2.1.0->pycocotools) (4.1.1)\n",
+            "Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.7/dist-packages (from python-dateutil>=2.1->matplotlib>=2.1.0->pycocotools) (1.15.0)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "cd .."
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "2ZS5N_5eTSew",
+        "outputId": "f0793d7a-b878-44d5-bcad-394dc0212429"
+      },
+      "execution_count": 210,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/drive/MyDrive/Github/TensorFlow/models\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%bash\n",
+        "cd research/\n",
+        "protoc object_detection/protos/*.proto --python_out=."
+      ],
+      "metadata": {
+        "id": "jZggZ_n1Tglw"
+      },
+      "execution_count": 216,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "cd research"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "arcZVWo0YhGc",
+        "outputId": "bbc41f60-b49e-4acd-d982-eb4709afa548"
+      },
+      "execution_count": 220,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/drive/MyDrive/Github/TensorFlow/models/research\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "cd object_detection"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "fHVFXmhMTnEP",
+        "outputId": "ac4b8d9b-4027-4deb-d706-61db7ec1e585"
+      },
+      "execution_count": 222,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/drive/MyDrive/Github/TensorFlow/models/research/object_detection\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "ls\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "p5ZPR-2kYpQV",
+        "outputId": "844feda8-dbe0-4ae2-a70d-adb43f891812"
+      },
+      "execution_count": 226,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\u001b[0m\u001b[01;34manchor_generators\u001b[0m/                       \u001b[01;34minference\u001b[0m/\n",
+            "\u001b[01;34mbox_coders\u001b[0m/                              __init__.py\n",
+            "\u001b[01;34mbuilders\u001b[0m/                                inputs.py\n",
+            "\u001b[01;34mcolab_tutorials\u001b[0m/                         inputs_test.py\n",
+            "\u001b[01;34mconfigs\u001b[0m/                                 \u001b[01;34mlegacy\u001b[0m/\n",
+            "CONTRIBUTING.md                          \u001b[01;34mmatchers\u001b[0m/\n",
+            "\u001b[01;34mcore\u001b[0m/                                    \u001b[01;34mmeta_architectures\u001b[0m/\n",
+            "\u001b[01;34mdata\u001b[0m/                                    \u001b[01;34mmetrics\u001b[0m/\n",
+            "\u001b[01;34mdata_decoders\u001b[0m/                           model_hparams.py\n",
+            "\u001b[01;34mdataset_tools\u001b[0m/                           model_lib.py\n",
+            "\u001b[01;34mdockerfiles\u001b[0m/                             model_lib_tf1_test.py\n",
+            "eval_util.py                             model_lib_tf2_test.py\n",
+            "eval_util_test.py                        model_lib_v2.py\n",
+            "exporter_lib_tf2_test.py                 model_main.py\n",
+            "exporter_lib_v2.py                       model_main_tf2.py\n",
+            "exporter_main_v2.py                      \u001b[01;34mmodels\u001b[0m/\n",
+            "exporter.py                              model_tpu_main.py\n",
+            "exporter_tf1_test.py                     \u001b[01;34mpackages\u001b[0m/\n",
+            "export_inference_graph.py                \u001b[01;34mpredictors\u001b[0m/\n",
+            "export_tflite_graph_lib_tf2.py           \u001b[01;34mprotos\u001b[0m/\n",
+            "export_tflite_graph_lib_tf2_test.py      README.md\n",
+            "export_tflite_graph_tf2.py               \u001b[01;34msamples\u001b[0m/\n",
+            "export_tflite_ssd_graph_lib.py           \u001b[01;34mtest_data\u001b[0m/\n",
+            "export_tflite_ssd_graph_lib_tf1_test.py  \u001b[01;34mtest_images\u001b[0m/\n",
+            "export_tflite_ssd_graph.py               \u001b[01;34mtpu_exporters\u001b[0m/\n",
+            "\u001b[01;34mg3doc\u001b[0m/                                   \u001b[01;34mtraining\u001b[0m/\n",
+            "\u001b[01;34mimages\u001b[0m/                                  \u001b[01;34mutils\u001b[0m/\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%bash\n",
+        "pip install object_detection"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 413
+        },
+        "id": "h3ozqbRlYr-4",
+        "outputId": "fcf08549-3c3e-4dd5-a37f-eb49f680040e"
+      },
+      "execution_count": 225,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "ERROR: Could not find a version that satisfies the requirement object_detection (from versions: none)\n",
+            "ERROR: No matching distribution found for object_detection\n"
+          ]
+        },
+        {
+          "output_type": "error",
+          "ename": "CalledProcessError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mCalledProcessError\u001b[0m                        Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-225-1f97c6f4e701>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mget_ipython\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mrun_cell_magic\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'bash'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m''\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'pip install object_detection\\n'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;32m/usr/local/lib/python3.7/dist-packages/IPython/core/interactiveshell.py\u001b[0m in \u001b[0;36mrun_cell_magic\u001b[0;34m(self, magic_name, line, cell)\u001b[0m\n\u001b[1;32m   2357\u001b[0m             \u001b[0;32mwith\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mbuiltin_trap\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   2358\u001b[0m                 \u001b[0margs\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m(\u001b[0m\u001b[0mmagic_arg_s\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mcell\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m-> 2359\u001b[0;31m                 \u001b[0mresult\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mfn\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0margs\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkwargs\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m   2360\u001b[0m             \u001b[0;32mreturn\u001b[0m \u001b[0mresult\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   2361\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m/usr/local/lib/python3.7/dist-packages/IPython/core/magics/script.py\u001b[0m in \u001b[0;36mnamed_script_magic\u001b[0;34m(line, cell)\u001b[0m\n\u001b[1;32m    140\u001b[0m             \u001b[0;32melse\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    141\u001b[0m                 \u001b[0mline\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mscript\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 142\u001b[0;31m             \u001b[0;32mreturn\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mshebang\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mline\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mcell\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    143\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    144\u001b[0m         \u001b[0;31m# write a basic docstring:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m<decorator-gen-103>\u001b[0m in \u001b[0;36mshebang\u001b[0;34m(self, line, cell)\u001b[0m\n",
+            "\u001b[0;32m/usr/local/lib/python3.7/dist-packages/IPython/core/magic.py\u001b[0m in \u001b[0;36m<lambda>\u001b[0;34m(f, *a, **k)\u001b[0m\n\u001b[1;32m    185\u001b[0m     \u001b[0;31m# but it's overkill for just that one bit of state.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    186\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mmagic_deco\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0marg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 187\u001b[0;31m         \u001b[0mcall\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;32mlambda\u001b[0m \u001b[0mf\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m*\u001b[0m\u001b[0ma\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mk\u001b[0m\u001b[0;34m:\u001b[0m \u001b[0mf\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0ma\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mk\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    188\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    189\u001b[0m         \u001b[0;32mif\u001b[0m \u001b[0mcallable\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0marg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m/usr/local/lib/python3.7/dist-packages/IPython/core/magics/script.py\u001b[0m in \u001b[0;36mshebang\u001b[0;34m(self, line, cell)\u001b[0m\n\u001b[1;32m    243\u001b[0m             \u001b[0msys\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mstderr\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mflush\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    244\u001b[0m         \u001b[0;32mif\u001b[0m \u001b[0margs\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mraise_error\u001b[0m \u001b[0;32mand\u001b[0m \u001b[0mp\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mreturncode\u001b[0m\u001b[0;34m!=\u001b[0m\u001b[0;36m0\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 245\u001b[0;31m             \u001b[0;32mraise\u001b[0m \u001b[0mCalledProcessError\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mp\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mreturncode\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mcell\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0moutput\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0mout\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mstderr\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0merr\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    246\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    247\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0m_run_script\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mp\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mcell\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mto_close\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mCalledProcessError\u001b[0m: Command 'b'pip install object_detection\\n'' returned non-zero exit status 1."
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import numpy as np\n",
+        "import os\n",
+        "import six.moves.urllib as urllib\n",
+        "import sys\n",
+        "import tarfile\n",
+        "import tensorflow as tf\n",
+        "import zipfile\n",
+        "\n",
+        "from collections import defaultdict\n",
+        "from io import StringIO\n",
+        "from matplotlib import pyplot as plt\n",
+        "from PIL import Image\n",
+        "from IPython.display import display"
+      ],
+      "metadata": {
+        "id": "SPgdflohZMfd"
+      },
+      "execution_count": 227,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from object_detection.utils import ops as utils_ops\n",
+        "from object_detection.utils import label_map_util\n",
+        "from object_detection.utils import visualization_utils as vis_util"
+      ],
+      "metadata": {
+        "id": "QbmMQOPHZSLG"
+      },
+      "execution_count": 231,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# patch tf1 into `utils.ops`\n",
+        "utils_ops.tf = tf.compat.v1\n",
+        "\n",
+        "# Patch the location of gfile\n",
+        "tf.gfile = tf.io.gfile"
+      ],
+      "metadata": {
+        "id": "tOFjJyyPZjul"
+      },
+      "execution_count": 232,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def load_model(model_name):\n",
+        "  base_url = 'http://download.tensorflow.org/models/object_detection/'\n",
+        "  model_file = model_name + '.tar.gz'\n",
+        "  model_dir = tf.keras.utils.get_file(\n",
+        "    fname=model_name, \n",
+        "    origin=base_url + model_file,\n",
+        "    untar=True)\n",
+        "\n",
+        "  model_dir = pathlib.Path(model_dir)/\"saved_model\"\n",
+        "\n",
+        "  model = tf.saved_model.load(str(model_dir))\n",
+        "\n",
+        "  return model"
+      ],
+      "metadata": {
+        "id": "LEtDDgH2ZpFs"
+      },
+      "execution_count": 233,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# List of the strings that is used to add correct label for each box.\n",
+        "PATH_TO_LABELS = 'object_detection/data/mscoco_label_map.pbtxt'\n",
+        "category_index = label_map_util.create_category_index_from_labelmap(PATH_TO_LABELS, use_display_name=True)"
+      ],
+      "metadata": {
+        "id": "rb3QWXOBZuCk"
+      },
+      "execution_count": 235,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# If you want to test the code with your images, just add path to the images to the TEST_IMAGE_PATHS.\n",
+        "from pathlib import Path\n",
+        "import pathlib\n",
+        "PATH_TO_TEST_IMAGES_DIR = pathlib.Path('object_detection/test_images')\n",
+        "TEST_IMAGE_PATHS = sorted(list(PATH_TO_TEST_IMAGES_DIR.glob(\"*.jpg\")))\n",
+        "TEST_IMAGE_PATHS"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "a72TvWFrZznC",
+        "outputId": "f542011f-64fd-4bdc-9f3e-8bdc02f1c87e"
+      },
+      "execution_count": 242,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "[PosixPath('object_detection/test_images/image1.jpg'),\n",
+              " PosixPath('object_detection/test_images/image2.jpg'),\n",
+              " PosixPath('object_detection/test_images/image3.jpg')]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 242
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Detection "
+      ],
+      "metadata": {
+        "id": "8iGgNx9BfMr6"
+      }
+    }
+  ]
+}
